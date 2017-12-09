@@ -55,7 +55,7 @@ end
 local function randomizeFieldsFor(asteroid)
     asteroid.speed = math.random() + math.random(2, 5)
     asteroid.moneyAmount = math.random(1, 5)
-    asteroid.x = math.random(display.contentWidth + 50, display.contentWidth + 200)
+    asteroid.x = math.random(display.contentWidth + 50, display.contentWidth + 350)
     asteroid.y = math.random(50, display.contentHeight-60)
 end
 
@@ -164,10 +164,6 @@ local function createGoalText()
 end
 
 local function startTimer()
-    if gameTimer then 
-        timer.cancel(gameTimer)
-        gameTimer = nil
-    end
     gameTimer = timer.performWithDelay(1000, function(event)
         time = time - 1
         if time < 10 then
@@ -178,13 +174,43 @@ local function startTimer()
     end, 60)
 end
 
-local function nextLevel()
-    time = 60
-    goal = goal * 1.2
-    money = 0
-    level = level + 1
-    moneyText[1].text = "Level: " .. level
-    startTimer()
+local function stopTimer()
+    if gameTimer then 
+        timer.cancel(gameTimer)
+        gameTimer = nil
+    end
+end
+
+local function showNextLevelScreen()
+    nextLevelScreen = display.newGroup()
+    local rect = display.newRect( nextLevelScreen, display.contentCenterX, display.contentCenterY, display.contentWidth + 100, display.contentHeight + 100)
+    rect:setFillColor(0)
+    rect.alpha = 0.7
+    rect:addEventListener("touch", function() return true end)
+    display.newText( nextLevelScreen, "Gold gathered, prepare for", display.contentCenterX, display.contentCenterY-70, "Munro.ttf", 30 )
+    display.newText( nextLevelScreen, "level " .. level+1 .. "!", display.contentCenterX, display.contentCenterY-25, "Munro.ttf", 40 )
+    display.newText( nextLevelScreen, "in...", display.contentCenterX, display.contentCenterY+15, "Munro.ttf", 30 )
+    counterText = display.newText( nextLevelScreen, "5 seconds", display.contentCenterX, display.contentCenterY+50, "Munro.ttf", 30 )
+    timer.performWithDelay(1000, function(event)
+        counterText.text = tostring(5 - event.count) .. " seconds" 
+        if event.count >= 5 then
+            nextLevelScreen:removeSelf()
+            nextLevelScreen = nil
+            startTimer() 
+        end 
+    end, 5)
+end
+
+local function restartGameForNextLevel()
+    if gameTimer then
+        stopTimer()        
+        time = 60
+        goal = goal * 1.2
+        money = 0
+        level = level + 1
+        moneyText[1].text = "Level: " .. level
+        showNextLevelScreen()
+    end
 end
 
 local function gameLoss()
@@ -201,8 +227,8 @@ local function mainListener( event )
     if time <= 0 then
         gameLoss()
     elseif money >= goal then
-        nextLevel()        
-    else
+        restartGameForNextLevel()  
+    elseif gameTimer then
         for i=1,#asteroids do
             a = asteroids[i]
             moveAsteroid(a)

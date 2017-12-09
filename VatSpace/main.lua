@@ -28,14 +28,18 @@ local function moveAsteroid(asteroid)
 end
 
 local function createAsteroids()
+    local asteroidsImages = {"asteroid1.png", "asteroid2.png", "asteroid3.png", "asteroid4.png"}
+
     for i=1,10 do
-        asteroid = { 
-            body = display.newImage( "green.png"),        
+        asteroid = {
+            body = display.newImage( asteroidsImages[math.random(#asteroidsImages)]),     
             speed = 0,
             moneyAmount = 0
         }
         randomizeFieldsFor(asteroid)
-        asteroid.body:scale(2, 2)
+        asteroid.body:scale(0.15, 0.15)
+        asteroid.body.fill.effect = "filter.pixelate"
+        asteroid.body.fill.effect.numPixels = 20
         asteroid.body:addEventListener( "touch", tapAsteroid )        
         asteroids[i] = asteroid
     end
@@ -51,11 +55,9 @@ local function mainListener( event )
     end
 end
 
-
--- Your code here
-
 local function createBackground()
 
+    
     local sheetOptions =
     {
         width = 500,

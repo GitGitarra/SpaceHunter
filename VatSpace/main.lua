@@ -119,7 +119,6 @@ local function createMoneyText()
     moneyText.anchorX = 0
 end
 
-
 local function speech()
     local sheetOptions =
     {
@@ -139,16 +138,15 @@ local function speech()
         }
     }
     local morawiecki_speech = display.newSprite(speech_bubble, sequences_speech)
-    morawiecki_speech.x = 100
-    morawiecki_speech.y = 160
-    morawiecki_speech:scale(0.35, 0.35)
-    morawiecki_speech:play()
-    timer.performWithDelay(2500, function(event)
+        morawiecki_speech.x = 100
+        morawiecki_speech.y = 160
+        morawiecki_speech:scale(0.35, 0.35)
+        morawiecki_speech:play()
+        timer.performWithDelay(2500, function(event)
         morawiecki_speech:removeSelf()
         morawiecki_speech=nil
     end, 1)
 end
-
 
 local function spaceman()
     morawiecki = display.newImage("morawiecki.png", 10, 250)
@@ -167,6 +165,5 @@ local function run()
     Runtime:addEventListener( "enterFrame", mainListener )
 end
 
-
-
 run()
+

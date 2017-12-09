@@ -3,8 +3,12 @@
 -- main.lua
 --
 -----------------------------------------------------------------------------------------
+local widget = require( "widget" )
+
 asteroids = {}
-money = 0
+money = 1
+goal = 50000
+time = 60
 local coin_sound = audio.loadSound( "coin-drop-1.wav" )
 local end_game_sound = audio.loadSound( "endgame_sound.wav" )
 local fail_click = audio.loadSound( "beep17.wav" )
@@ -27,9 +31,9 @@ local function tapAsteroid(event)
         if asteroid.moneyAmount > 0 then
             asteroid.moneyAmount = asteroid.moneyAmount - 1
             money = money + 1000
-            moneyText.text = "Money: " .. money
             audio.play(coin_sound)
             createCoin(asteroid.x, asteroid.y - 25)
+            progressView:setProgress( money/goal )
         else
             audio.play(fail_click)
         end
@@ -81,16 +85,6 @@ local function createAsteroids()
     end
 end
 
-local function mainListener( event )
-    for i=1,#asteroids do
-        a = asteroids[i]
-        moveAsteroid(a)
-        if a.x < -50 then
-            randomizeFieldsFor(a)
-        end
-    end
-end
-
 local function createBackground()
     local sheetOptions =
     {
@@ -114,19 +108,87 @@ local function createBackground()
     spaceStars:play()
 end
 
-local function createMoneyText()
-    moneyText = display.newRect(0, 0, 50, 50)
-    moneyText:setFillColor( 0.5 )
-    moneyText = display.newText( "Money: 0", 0, 15, native.systemFont, 16 )
-    moneyText.anchorX = 0
+local function createMoneyStatusBar()
+    progressView = display.newImage("statusbar.png", -20, 25)
+    progressView.anchorX = 0
+    progressView:scale(0.2, 0.2)
+    progressView = display.newImage("coin.png", -30, 25)
+    progressView.anchorX = 0
+    progressView:scale(0.35, 0.35)
+    progressView = widget.newProgressView(
+        {
+            left = -5,
+            top = 23,
+            width = 103,
+            isAnimated = true
+        }
+    )
+    progressView:scale(1, 3)
+    progressView:setProgress( 0 )
+    -- progressView
 end
 
-local function run()
+local function createGoalText()
+    moneyText = display.newText( "Gain coins for 5000+ goverment program", 130, 25, "Munro.ttf", 16 )
+    moneyText.anchorX = 0
+    timeText = display.newText( "0:60s", display.contentWidth, 25, "Munro.ttf", 16 )
+    -- timeText.anchorX = 1
+end
+
+local function startTimer()
+    timer.performWithDelay(1000, function(event)
+        time = time - 1
+        if time < 10 then
+            timeText.text = "0:0" .. tostring(time) .. "s"            
+        else
+            timeText.text = "0:" .. tostring(time) .. "s" 
+        end
+    end, 60)
+end
+
+local function nextLevel()
+    time = 60
+    goal = goal * 1.2
+    money = 0
+    startTimer()
+end
+
+local function gameLoss()
+    return false
+end
+
+local function checkGameStatus()
+    if time <= 0 then
+        gameLoss()
+    elseif money >= goal then
+        nextLevel()
+    end
+end
+
+local function startGame()
     createBackground()
     createAsteroids()
     createCoinAsteroids()
-    createMoneyText()    
+    createGoalText()
+    createMoneyStatusBar()
+    startTimer()
+end
+
+local function mainListener( event )
+    for i=1,#asteroids do
+        a = asteroids[i]
+        moveAsteroid(a)
+        if a.x < -50 then
+            randomizeFieldsFor(a)
+        end
+    end
+    checkGameStatus()
+end
+
+local function run()
+    startGame()
     Runtime:addEventListener( "enterFrame", mainListener )
 end
 
 run()
+

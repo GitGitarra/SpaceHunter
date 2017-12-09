@@ -4,12 +4,14 @@
 --
 -----------------------------------------------------------------------------------------
 local widget = require( "widget" )
+display.setStatusBar( display.HiddenStatusBar )
 
 asteroids = {}
 money = 1
 goal = 50000
-time = 60
+time = 5
 level = 1
+total_gold = 0
 local coin_sound = audio.loadSound( "coin-drop-1.wav" )
 local end_game_sound = audio.loadSound( "endgame_sound.wav" )
 local fail_click = audio.loadSound( "beep17.wav" )
@@ -32,6 +34,7 @@ local function tapAsteroid(event)
         if asteroid.moneyAmount > 0 then
             asteroid.moneyAmount = asteroid.moneyAmount - 1
             money = money + 1000
+            total_gold = total_gold + 1000
             audio.play(coin_sound)
             createCoin(asteroid.x, asteroid.y - 25)
             progressView:setProgress( money/goal )
@@ -157,7 +160,7 @@ end
 local function createGoalText()
     moneyText = {}
     moneyText[1] = display.newText( "Level: " .. level, display.contentCenterX, 17, "Munro.ttf", 16 )
-    moneyText[2] = display.newText( "Gain coins for 500+ program", display.contentCenterX, 33, "Munro.ttf", 16 )
+    moneyText[2] = display.newText( "Gain coins for 5000+ program", display.contentCenterX, 33, "Munro.ttf", 16 )
     -- moneyText.anchorX = 0
     timeText = display.newText( "0:60s", display.contentWidth, 25, "Munro.ttf", 16 )
     -- timeText.anchorX = 1
@@ -188,7 +191,7 @@ local function showNextLevelScreen()
     rect.alpha = 0.7
     rect:addEventListener("touch", function() return true end)
     display.newText( nextLevelScreen, "Gold gathered, prepare for", display.contentCenterX, display.contentCenterY-70, "Munro.ttf", 30 )
-    display.newText( nextLevelScreen, "level " .. level+1 .. "!", display.contentCenterX, display.contentCenterY-25, "Munro.ttf", 40 )
+    display.newText( nextLevelScreen, "level " .. level .. "!", display.contentCenterX, display.contentCenterY-25, "Munro.ttf", 40 )
     display.newText( nextLevelScreen, "in...", display.contentCenterX, display.contentCenterY+15, "Munro.ttf", 30 )
     counterText = display.newText( nextLevelScreen, "5 seconds", display.contentCenterX, display.contentCenterY+50, "Munro.ttf", 30 )
     timer.performWithDelay(1000, function(event)
@@ -209,12 +212,27 @@ local function restartGameForNextLevel()
         money = 0
         level = level + 1
         moneyText[1].text = "Level: " .. level
+        progressView:setProgress( money/goal )
         showNextLevelScreen()
     end
 end
 
 local function gameLoss()
-    moneyText[3] = display.newText( "You loooose!", display.contentCenterX, display.contentCenterY, "Munro.ttf", 46 )
+    local rect = display.newRect( display.contentCenterX, display.contentCenterY, display.contentWidth + 100, display.contentHeight + 100)
+    rect:setFillColor(0)
+    rect.alpha = 0.7
+    rect:addEventListener("touch", function() return true end)
+    display.newText( "You loooose!", display.contentCenterX+100, display.contentCenterY-100, "Munro.ttf", 35 )
+    display.newText( "Mr. Morawnaut is", display.contentCenterX+100, display.contentCenterY-50, "Munro.ttf", 35 )
+    display.newText( "now really sad :(", display.contentCenterX+100, display.contentCenterY, "Munro.ttf", 35 )
+    display.newText( "Gold gathered:", display.contentCenterX+100, display.contentCenterY+50, "Munro.ttf", 35 )
+    display.newText( total_gold, display.contentCenterX+100, display.contentCenterY+100, "Munro.ttf", 35 )
+    local morawiecki = display.newImage("morawieckiPlacz2.png", -45, display.contentHeight)
+    morawiecki.fill.effect = "filter.pixelate"
+    morawiecki.fill.effect.numPixels = 8
+    morawiecki.anchorX = 0
+    morawiecki.anchorY = 1
+    morawiecki:scale(0.35, 0.35)
 end
 
 local function checkGameStatus()
@@ -269,7 +287,7 @@ local function speech()
 end
 
 local function spaceman()
-    morawiecki = display.newImage("morawiecki.png", 10, 250)
+    local morawiecki = display.newImage("morawiecki.png", 10, 250)
     morawiecki:scale(0.1, 0.1)
     morawiecki.fill.effect = "filter.pixelate"
     morawiecki.fill.effect.numPixels = 15

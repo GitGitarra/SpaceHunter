@@ -41,7 +41,7 @@ local function randomizeFieldsFor(asteroid)
     asteroid.speed = math.random() + math.random(2, 5)
     asteroid.moneyAmount = math.random(1, 5)
     asteroid.x = math.random(display.contentWidth + 50, display.contentWidth + 200)
-    asteroid.y = math.random(20, display.contentHeight-50)
+    asteroid.y = math.random(50, display.contentHeight-60)
 end
 
 local function moveAsteroid(asteroid)
@@ -51,12 +51,13 @@ end
 local function createCoinAsteroids()
     local asteroidsImages = {"asteroid1factory.png", "asteroid2factory.png", "asteroid3factory.png"}
 
-    for i=10,15 do
+    for i=#asteroids,#asteroids+5 do
         asteroid = display.newImage( asteroidsImages[math.random(#asteroidsImages)] )
         asteroid.speed = 0
         asteroid.moneyAmount = 0
         randomizeFieldsFor(asteroid)
-        asteroid:scale(0.15, 0.15)
+        scaleRandom = math.random(10, 16) / 100
+        asteroid:scale(scaleRandom, scaleRandom)
         asteroid.fill.effect = "filter.pixelate"
         asteroid.fill.effect.numPixels = 20
         asteroid:addEventListener( "touch", tapAsteroid )
@@ -67,12 +68,13 @@ end
 local function createAsteroids()
     local asteroidsImages = {"asteroid1.png", "asteroid2.png", "asteroid3.png", "asteroid4.png"}
 
-    for i=1,10 do
+    for i=1,20 do
         asteroid = display.newImage( asteroidsImages[math.random(#asteroidsImages)] )   
         asteroid.speed = 0
         asteroid.moneyAmount = 0
         randomizeFieldsFor(asteroid)
-        asteroid:scale(0.15, 0.15)
+        scaleRandom = math.random(8, 14) / 100
+        asteroid:scale(scaleRandom, scaleRandom)
         asteroid.fill.effect = "filter.pixelate"
         asteroid.fill.effect.numPixels = 20
         asteroids[i] = asteroid

@@ -9,6 +9,7 @@ asteroids = {}
 money = 1
 goal = 50000
 time = 60
+level = 1
 local coin_sound = audio.loadSound( "coin-drop-1.wav" )
 local end_game_sound = audio.loadSound( "endgame_sound.wav" )
 local fail_click = audio.loadSound( "beep17.wav" )
@@ -129,14 +130,20 @@ local function createMoneyStatusBar()
 end
 
 local function createGoalText()
-    moneyText = display.newText( "Gain coins for 5000+ goverment program", 130, 25, "Munro.ttf", 16 )
-    moneyText.anchorX = 0
+    moneyText = {}
+    moneyText[1] = display.newText( "Level: " .. level, display.contentCenterX, 17, "Munro.ttf", 16 )
+    moneyText[2] = display.newText( "Gain coins for 500+ program", display.contentCenterX, 33, "Munro.ttf", 16 )
+    -- moneyText.anchorX = 0
     timeText = display.newText( "0:60s", display.contentWidth, 25, "Munro.ttf", 16 )
     -- timeText.anchorX = 1
 end
 
 local function startTimer()
-    timer.performWithDelay(1000, function(event)
+    if gameTimer then 
+        timer.cancel(gameTimer)
+        gameTimer = nil
+    end
+    gameTimer = timer.performWithDelay(1000, function(event)
         time = time - 1
         if time < 10 then
             timeText.text = "0:0" .. tostring(time) .. "s"            
@@ -150,30 +157,35 @@ local function nextLevel()
     time = 60
     goal = goal * 1.2
     money = 0
+    level = level + 1
+    moneyText[1].text = "Level: " .. level
     startTimer()
 end
 
 local function gameLoss()
-    return false
+    moneyText[3] = display.newText( "You loooose!", display.contentCenterX, display.contentCenterY, "Munro.ttf", 46 )
 end
 
 local function checkGameStatus()
     if time <= 0 then
-        gameLoss()
     elseif money >= goal then
-        nextLevel()
     end
 end
 
 local function mainListener( event )
-    for i=1,#asteroids do
-        a = asteroids[i]
-        moveAsteroid(a)
-        if a.x < -50 then
-            randomizeFieldsFor(a)
+    if time <= 0 then
+        gameLoss()
+    elseif money >= goal then
+        nextLevel()        
+    else
+        for i=1,#asteroids do
+            a = asteroids[i]
+            moveAsteroid(a)
+            if a.x < -50 then
+                randomizeFieldsFor(a)
+            end
         end
     end
-    checkGameStatus()
 end
 
 local function speech()
@@ -221,11 +233,11 @@ local function startGame()
     createMoneyStatusBar()
     spaceman()
     startTimer()
+    Runtime:addEventListener( "enterFrame", mainListener )    
 end
 
 local function run()
     startGame()
-    Runtime:addEventListener( "enterFrame", mainListener )
 end
 
 run()

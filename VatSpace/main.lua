@@ -165,15 +165,6 @@ local function checkGameStatus()
     end
 end
 
-local function startGame()
-    createBackground()
-    createAsteroids()
-    createCoinAsteroids()
-    createGoalText()
-    createMoneyStatusBar()
-    startTimer()
-end
-
 local function mainListener( event )
     for i=1,#asteroids do
         a = asteroids[i]
@@ -183,6 +174,53 @@ local function mainListener( event )
         end
     end
     checkGameStatus()
+end
+
+local function speech()
+    local sheetOptions =
+    {
+        width = 621,
+        height = 180,
+        numFrames = 23
+    }
+    speech_bubble = graphics.newImageSheet("speech1.png", sheetOptions)
+    local sequences_speech = {
+        {
+            name = "bubble1",
+            start = 1,
+            count = 23,
+            time = 2000,
+            loopCount = 1,
+            loopDirection = "forward"
+        }
+    }
+    local morawiecki_speech = display.newSprite(speech_bubble, sequences_speech)
+        morawiecki_speech.x = 100
+        morawiecki_speech.y = 160
+        morawiecki_speech:scale(0.35, 0.35)
+        morawiecki_speech:play()
+        timer.performWithDelay(2500, function(event)
+        morawiecki_speech:removeSelf()
+        morawiecki_speech=nil
+    end, 1)
+end
+
+local function spaceman()
+    morawiecki = display.newImage("morawiecki.png", 10, 250)
+    morawiecki:scale(0.1, 0.1)
+    morawiecki.fill.effect = "filter.pixelate"
+    morawiecki.fill.effect.numPixels = 15
+    morawiecki:addEventListener("touch", speech)
+end
+
+local function startGame()
+    createBackground()
+    createAsteroids()
+    createCoinAsteroids()
+    createGoalText()
+    createMoneyStatusBar()
+    spaceman()
+    startTimer()
 end
 
 local function run()

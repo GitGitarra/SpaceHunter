@@ -8,8 +8,8 @@ display.setStatusBar( display.HiddenStatusBar )
 
 asteroids = {}
 money = 1
-goal = 50000
-time = 5
+goal = 25000
+time = 60
 level = 1
 total_gold = 0
 local coin_sound = audio.loadSound( "coin-drop-1.wav" )
@@ -223,7 +223,7 @@ local function gameLoss()
     rect.alpha = 0.7
     rect:addEventListener("touch", function() return true end)
     display.newText( "You loooose!", display.contentCenterX+100, display.contentCenterY-100, "Munro.ttf", 35 )
-    display.newText( "Mr. Morawnaut is", display.contentCenterX+100, display.contentCenterY-50, "Munro.ttf", 35 )
+    display.newText( "Mr. Moravat is", display.contentCenterX+100, display.contentCenterY-50, "Munro.ttf", 35 )
     display.newText( "now really sad :(", display.contentCenterX+100, display.contentCenterY, "Munro.ttf", 35 )
     display.newText( "Gold gathered:", display.contentCenterX+100, display.contentCenterY+50, "Munro.ttf", 35 )
     display.newText( total_gold, display.contentCenterX+100, display.contentCenterY+100, "Munro.ttf", 35 )
@@ -294,6 +294,7 @@ local function spaceman()
     morawiecki:addEventListener("touch", speech)
 end
 
+
 local function startGame()
     createBackground()
     createAsteroids()
@@ -305,9 +306,35 @@ local function startGame()
     startTimer()
     Runtime:addEventListener( "enterFrame", mainListener )    
 end
+local function menuPage()
+    
+    local dupa = display.newGroup()
+    local rect = display.newRect( dupa, display.contentCenterX, display.contentCenterY, display.contentWidth + 100, display.contentHeight + 100)
+    local gameName = display.newImage(dupa, "The-Vat-Hunter.png",display.contentCenterX, display.contentCenterY - 45)
+    rect:setFillColor(0)
+    local function handleButtonEvent( event )
+        
+           if ( "ended" == event.phase ) then
+                dupa:removeSelf()
+                dupa = nil
+               startGame()
+           end
+       end
+    local button1 = widget.newButton(
+        {
+            defaultFile = "startbutton.png",
+            overFile = "startbutton_active.png",
+            onEvent = handleButtonEvent
+        }
+    )
+    dupa:insert(button1)
+    button1.x = display.contentCenterX
+    button1.y = display.contentCenterY + 30
+    button1:scale(0.5, 0.5)
+end
 
 local function run()
-    startGame()
+    menuPage()
 end
 
 run()

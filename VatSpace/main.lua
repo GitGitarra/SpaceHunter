@@ -42,6 +42,16 @@ local function tapAsteroid(event)
     return true
 end
 
+local function tapSaintAsteroid(event)
+    if ( event.phase == "ended" ) then
+        if money >= 1 then
+            money = money - 1000
+        end
+            audio.play(fail_click)
+            progressView:setProgress( money/goal )
+    end
+    return true
+end
 local function randomizeFieldsFor(asteroid)
     asteroid.speed = math.random() + math.random(2, 5)
     asteroid.moneyAmount = math.random(1, 5)
@@ -67,6 +77,21 @@ local function createCoinAsteroids()
         asteroid.fill.effect.numPixels = 20
         asteroid:addEventListener( "touch", tapAsteroid )
         asteroids[i] = asteroid
+    end
+end
+
+local function createSaintAsteroids()
+    for i=#asteroids,#asteroids+2 do
+        church_asteroid = display.newImage( "church1.png" )
+        church_asteroid.speed = 0
+        church_asteroid.moneyAmount = 0
+        randomizeFieldsFor(church_asteroid)
+        scaleRandom = math.random(15, 25) / 100
+        church_asteroid:scale(scaleRandom, scaleRandom)
+        church_asteroid.fill.effect = "filter.pixelate"
+        church_asteroid.fill.effect.numPixels = 15
+        church_asteroid:addEventListener( "touch", tapSaintAsteroid )
+        asteroids[i] =church_asteroid
     end
 end
 
@@ -229,6 +254,7 @@ local function startGame()
     createBackground()
     createAsteroids()
     createCoinAsteroids()
+    createSaintAsteroids()
     createGoalText()
     createMoneyStatusBar()
     spaceman()

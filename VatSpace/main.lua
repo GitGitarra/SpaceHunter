@@ -17,7 +17,7 @@ local end_game_sound = audio.loadSound( "endgame_sound.wav" )
 local fail_click = audio.loadSound( "beep17.wav" )
 
 local function createCoin(x, y)
-    local coin = display.newImage("coin.png", x, y)
+    local coin = display.newImage("resources/graphics/coin.png", x, y)
     coin:scale(0.2, 0.2)
     timer.performWithDelay(35, function(event)
         coin.y = coin.y - 1
@@ -67,7 +67,10 @@ local function moveAsteroid(asteroid)
 end
 
 local function createCoinAsteroids()
-    local asteroidsImages = {"asteroid1factory.png", "asteroid2factory.png", "asteroid3factory.png"}
+    local asteroidsImages = {
+        "resources/graphics/asteroid1factory.png", 
+        "resources/graphics/asteroid2factory.png",
+        "resources/graphics/asteroid3factory.png"}
 
     for i=#asteroids,#asteroids+5 do
         asteroid = display.newImage( asteroidsImages[math.random(#asteroidsImages)] )
@@ -85,7 +88,7 @@ end
 
 local function createSaintAsteroids()
     for i=#asteroids,#asteroids+2 do
-        church_asteroid = display.newImage( "church1.png" )
+        church_asteroid = display.newImage( "resources/graphics/church1.png" )
         church_asteroid.speed = 0
         church_asteroid.moneyAmount = 0
         randomizeFieldsFor(church_asteroid)
@@ -99,7 +102,11 @@ local function createSaintAsteroids()
 end
 
 local function createAsteroids()
-    local asteroidsImages = {"asteroid1.png", "asteroid2.png", "asteroid3.png", "asteroid4.png"}
+    local asteroidsImages = {
+        "resources/graphics/asteroid1.png", 
+        "resources/graphics/asteroid2.png", 
+        "resources/graphics/asteroid3.png", 
+        "resources/graphics/asteroid4.png"}
 
     for i=1,20 do
         asteroid = display.newImage( asteroidsImages[math.random(#asteroidsImages)] )   
@@ -121,7 +128,7 @@ local function createBackground()
         height = 281,
         numFrames = 18
     }
-    local space_background = graphics.newImageSheet( "space.png", sheetOptions )
+    local space_background = graphics.newImageSheet( "resources/graphics/space.png", sheetOptions )
     local sequences_spaceStars = {
         {
             name = "background",
@@ -138,10 +145,10 @@ local function createBackground()
 end
 
 local function createMoneyStatusBar()
-    progressView = display.newImage("statusbar.png", -20, 25)
+    progressView = display.newImage("resources/graphics/statusbar.png", -20, 25)
     progressView.anchorX = 0
     progressView:scale(0.2, 0.2)
-    progressView = display.newImage("coin.png", -30, 25)
+    progressView = display.newImage("resources/graphics/coin.png", -30, 25)
     progressView.anchorX = 0
     progressView:scale(0.35, 0.35)
     progressView = widget.newProgressView(
@@ -227,7 +234,7 @@ local function gameLoss()
     display.newText( "now really sad :(", display.contentCenterX+100, display.contentCenterY, "Munro.ttf", 35 )
     display.newText( "Gold gathered:", display.contentCenterX+100, display.contentCenterY+50, "Munro.ttf", 35 )
     display.newText( total_gold, display.contentCenterX+100, display.contentCenterY+100, "Munro.ttf", 35 )
-    local morawiecki = display.newImage("morawieckiPlacz2.png", -45, display.contentHeight)
+    local morawiecki = display.newImage("resources/graphics/morawieckiPlacz2.png", -45, display.contentHeight)
     morawiecki.fill.effect = "filter.pixelate"
     morawiecki.fill.effect.numPixels = 8
     morawiecki.anchorX = 0
@@ -264,7 +271,7 @@ local function speech()
         height = 180,
         numFrames = 23
     }
-    speech_bubble = graphics.newImageSheet("speech1.png", sheetOptions)
+    speech_bubble = graphics.newImageSheet("resources/graphics/speech1.png", sheetOptions)
     local sequences_speech = {
         {
             name = "bubble1",
@@ -287,7 +294,7 @@ local function speech()
 end
 
 local function spaceman()
-    local morawiecki = display.newImage("morawiecki.png", 10, 250)
+    local morawiecki = display.newImage("resources/graphics/morawiecki.png", 10, 250)
     morawiecki:scale(0.1, 0.1)
     morawiecki.fill.effect = "filter.pixelate"
     morawiecki.fill.effect.numPixels = 15
@@ -310,7 +317,7 @@ local function menuPage()
     
     local dupa = display.newGroup()
     local rect = display.newRect( dupa, display.contentCenterX, display.contentCenterY, display.contentWidth + 100, display.contentHeight + 100)
-    local gameName = display.newImage(dupa, "The-Vat-Hunter.png",display.contentCenterX, display.contentCenterY - 45)
+    local gameName = display.newImage(dupa, "resources/graphics/The-Vat-Hunter.png",display.contentCenterX, display.contentCenterY - 45)
     rect:setFillColor(0)
     local function handleButtonEvent( event )
         
@@ -322,8 +329,8 @@ local function menuPage()
        end
     local button1 = widget.newButton(
         {
-            defaultFile = "startbutton.png",
-            overFile = "startbutton_active.png",
+            defaultFile = "resources/graphics/startbutton.png",
+            overFile = "resources/graphics/startbutton_active.png",
             onEvent = handleButtonEvent
         }
     )

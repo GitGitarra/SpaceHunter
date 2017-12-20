@@ -12,9 +12,9 @@ goal = 25000
 time = 60
 level = 1
 total_gold = 0
-local coin_sound = audio.loadSound( "coin-drop-1.wav" )
-local end_game_sound = audio.loadSound( "endgame_sound.wav" )
-local fail_click = audio.loadSound( "beep17.wav" )
+local coin_sound = audio.loadSound( "resources/sounds/coin-drop-1.wav" )
+local end_game_sound = audio.loadSound( "resources/sounds/endgame_sound.wav" )
+local fail_click = audio.loadSound( "resources/sounds/beep17.wav" )
 
 local function createCoin(x, y)
     local coin = display.newImage("resources/graphics/coin.png", x, y)

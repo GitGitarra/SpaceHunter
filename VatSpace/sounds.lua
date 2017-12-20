@@ -1,6 +1,6 @@
-local coin_sound = audio.loadSound( "coin-drop-1.wav" )
-local end_game_sound = audio.loadSound( "endgame_sound.wav" )
-local fail_click = audio.loadSound( "beep17.wav" )
+local coin_sound = audio.loadSound( "resources/sounds/coin-drop-1.wav" )
+local end_game_sound = audio.loadSound( "resources/sounds/endgame_sound.wav" )
+local fail_click = audio.loadSound( "resources/sounds/beep17.wav" )
 local function tapListener( event )
        audio.play(fail_click)
        -- Code executed when the button is tapped

@@ -1,5 +1,6 @@
 local widget = require( "widget" )
 local gv = require( "gamevariables" )
+local sounds = require( "sounds" )
 
 local M = {}
 
@@ -91,6 +92,7 @@ end
 
 function M.showGameOverScreen()
     gv.game_state = 'IN_MENU'
+    sounds.playEndGameSound()
     local game_over_page_group = display.newGroup()
     local rect = display.newRect( game_over_page_group, display.contentCenterX, display.contentCenterY, display.contentWidth + 100, display.contentHeight + 100)
     rect:setFillColor(0)

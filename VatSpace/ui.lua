@@ -163,6 +163,17 @@ function M.showMenu()
              gv.game_state = 'PLAY'
            end
        end
+    local button1 = widget.newButton(
+        {
+            defaultFile = "resources/graphics/startbutton.png",
+            overFile = "resources/graphics/startbutton_active.png",
+            onEvent = handleButtonEvent
+        }
+    )
+    menu_page_group:insert(button1)
+    button1.x = display.contentCenterX
+    button1.y = display.contentCenterY
+    button1:scale(0.4, 0.4)
 
     local function handleButtonEvent2( event )
         if ( "ended" == event.phase ) then
@@ -171,15 +182,6 @@ function M.showMenu()
           gv.game_state = 'HELP'
         end
     end
-
-    local button1 = widget.newButton(
-        {
-            defaultFile = "resources/graphics/startbutton.png",
-            overFile = "resources/graphics/startbutton_active.png",
-            onEvent = handleButtonEvent
-        }
-    )
-
     local button2 = widget.newButton(
         {
             defaultFile = "resources/graphics/startbutton2.png",
@@ -187,17 +189,10 @@ function M.showMenu()
             onEvent = handleButtonEvent2
         }
     )
-
-    menu_page_group:insert(button1)
-    button1.x = display.contentCenterX
-    button1.y = display.contentCenterY
-    button1:scale(0.4, 0.4)
-
     menu_page_group:insert(button2)
     button2.x = display.contentCenterX
     button2.y = display.contentCenterY + 70
     button2:scale(0.4, 0.4)
-
 end
 
 function M.showHelp()
@@ -213,7 +208,7 @@ function M.showHelp()
             help_page_group = nil
             gv.game_state = 'MENU'
           end
-      end
+    end
 
       local button = widget.newButton(
           {
@@ -226,8 +221,8 @@ function M.showHelp()
       button.x = display.contentCenterX
       button.y = display.contentCenterY + 100
       button:scale(0.3, 0.3)
-
 end
+
 function M.restartUI()
     M.progressView:setProgress( 0 )
     M.timeText.text = "0:60s"

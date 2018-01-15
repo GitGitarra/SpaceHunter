@@ -74,6 +74,8 @@ local function mainListener( event )
         restartGame()
     elseif gv.game_state == 'MENU' then
         ui.showMenu()
+    elseif gv.game_state == 'HELP' then
+        ui.showHelp()
     elseif gv.time <= 0 and gv.game_state == 'PLAYING' then
         gameOver()
     elseif gv.money >= gv.goal and gv.game_state == 'PLAYING' then

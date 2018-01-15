@@ -116,6 +116,14 @@ function M.showGameOverScreen()
              gv.game_state = 'RESTART'
            end
        end
+
+    local function handleButtonEvent2( event )
+        if ( "ended" == event.phase ) then
+          game_over_page_group:removeSelf()
+          game_over_page_group = nil
+          gv.game_state = 'MENU'
+        end
+    end   
     local button1 = widget.newButton(
         {
             defaultFile = "resources/graphics/startbutton.png",
@@ -123,10 +131,23 @@ function M.showGameOverScreen()
             onEvent = handleButtonEvent
         }
     )
+    local button2 = widget.newButton(
+        {
+            defaultFile = "resources/graphics/startbutton2.png",
+            overFile = "resources/graphics/startbutton_active.png",
+            onEvent = handleButtonEvent2
+        }
+    )
     game_over_page_group:insert(button1)
     button1.x = display.contentCenterX - 170
-    button1.y = display.contentCenterY - 100
-    button1:scale(0.5, 0.5)
+    button1.y = display.contentCenterY - 120
+    button1:scale(0.3, 0.3)
+
+    game_over_page_group:insert(button2)
+    button2.x = display.contentCenterX - 170
+    button2.y = display.contentCenterY - 70
+    button2:scale(0.3, 0.3)
+
 end
 
 function M.showMenu()

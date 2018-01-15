@@ -154,7 +154,7 @@ function M.showMenu()
     gv.game_state = 'IN_MENU'
     local menu_page_group = display.newGroup()
     local rect = display.newRect( menu_page_group, display.contentCenterX, display.contentCenterY, display.contentWidth + 100, display.contentHeight + 100)
-    local gameName = display.newImage( menu_page_group, "resources/graphics/The-Vat-Hunter.png",display.contentCenterX, display.contentCenterY - 45)
+    local gameName = display.newImage( menu_page_group, "resources/graphics/The-Vat-Hunter.png",display.contentCenterX, display.contentCenterY - 75)
     rect:setFillColor(0)
     local function handleButtonEvent( event )
            if ( "ended" == event.phase ) then
@@ -163,6 +163,15 @@ function M.showMenu()
              gv.game_state = 'PLAY'
            end
        end
+
+    local function handleButtonEvent2( event )
+        if ( "ended" == event.phase ) then
+          menu_page_group:removeSelf()
+          menu_page_group = nil
+          gv.game_state = 'HELP'
+        end
+    end
+
     local button1 = widget.newButton(
         {
             defaultFile = "resources/graphics/startbutton.png",
@@ -170,12 +179,55 @@ function M.showMenu()
             onEvent = handleButtonEvent
         }
     )
+
+    local button2 = widget.newButton(
+        {
+            defaultFile = "resources/graphics/startbutton2.png",
+            overFile = "resources/graphics/startbutton_active.png",
+            onEvent = handleButtonEvent2
+        }
+    )
+
     menu_page_group:insert(button1)
     button1.x = display.contentCenterX
-    button1.y = display.contentCenterY + 30
-    button1:scale(0.5, 0.5)
+    button1.y = display.contentCenterY
+    button1:scale(0.4, 0.4)
+
+    menu_page_group:insert(button2)
+    button2.x = display.contentCenterX
+    button2.y = display.contentCenterY + 70
+    button2:scale(0.4, 0.4)
+
 end
 
+function M.showHelp()
+    gv.game_state = 'HELP'
+    local help_page_group = display.newGroup()
+    local rect = display.newRect(help_page_group, display.contentCenterX, display.contentCenterY, display.contentWidth + 100, display.contentHeight + 100)
+    rect:setFillColor(0.3)
+    local myText = display.newText( help_page_group, "HELP", display.contentCenterX, display.contentCenterY - 100, "Munro.ttf", 50 )
+    
+    local function handleButtonEvent(event)
+        if ( "ended" == event.phase ) then
+            help_page_group:removeSelf()
+            help_page_group = nil
+            gv.game_state = 'MENU'
+          end
+      end
+
+      local button = widget.newButton(
+          {
+            defaultFile = "resources/graphics/startbutton2.png",
+            overFile = "resources/graphics/startbutton_active.png",
+            onEvent = handleButtonEvent 
+          }
+      )
+      help_page_group:insert(button)
+      button.x = display.contentCenterX
+      button.y = display.contentCenterY + 100
+      button:scale(0.3, 0.3)
+
+end
 function M.restartUI()
     M.progressView:setProgress( 0 )
     M.timeText.text = "0:60s"

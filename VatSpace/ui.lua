@@ -223,6 +223,35 @@ function M.showHelp()
       button:scale(0.3, 0.3)
 end
 
+function M.showCredits()
+    gv.game_state = 'CREDITS'
+    local credits_page_group = display.newGroup()
+    local rect = display.newRect(credits_page_group, display.contentCenterX, display.contentCenterY, display.contentWidth + 100, display.contentHeight + 100)
+    rect:setFillColor(0.5)
+    local myText = display.newText( credits_page_group, "HELP", display.contentCenterX, display.contentCenterY - 100, "Munro.ttf", 50 )
+    
+    local function handleButtonEvent(event)
+        if ( "ended" == event.phase ) then
+            credits_page_group:removeSelf()
+            credits_page_group = nil
+            gv.game_state = 'MENU'
+          end
+    end
+
+      local button = widget.newButton(
+          {
+            defaultFile = "resources/graphics/startbutton2.png",
+            overFile = "resources/graphics/startbutton_active.png",
+            onEvent = handleButtonEvent 
+          }
+      )
+      credits_page_group:insert(button)
+      button.x = display.contentCenterX
+      button.y = display.contentCenterY + 100
+      button:scale(0.3, 0.3)
+end
+
+
 function M.restartUI()
     M.progressView:setProgress( 0 )
     M.timeText.text = "0:60s"

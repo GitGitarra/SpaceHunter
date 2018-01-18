@@ -13,6 +13,8 @@ M.game_state = 'START'
 -- 'PLAYING'
 -- 'GAME_OVER'
 -- 'MENU' - show start menu screen
+-- 'HELP' - show help paage
+-- 'CREDITS' - show credits page
 -- 'RESTART' - restart game command
 
 function M.setVariablesToStartValues()

@@ -124,29 +124,29 @@ function M.showGameOverScreen()
           gv.game_state = 'MENU'
         end
     end   
-    local button1 = widget.newButton(
+    local button_restart = widget.newButton(
         {
             defaultFile = "resources/graphics/startbutton.png",
             overFile = "resources/graphics/startbutton_active.png",
             onEvent = handleButtonEvent
         }
     )
-    local button2 = widget.newButton(
+    local button_back_to_menu = widget.newButton(
         {
             defaultFile = "resources/graphics/startbutton2.png",
             overFile = "resources/graphics/startbutton_active.png",
             onEvent = handleButtonEvent2
         }
     )
-    game_over_page_group:insert(button1)
-    button1.x = display.contentCenterX - 170
-    button1.y = display.contentCenterY - 120
-    button1:scale(0.3, 0.3)
+    game_over_page_group:insert(button_restart)
+    button_restart.x = display.contentCenterX - 170
+    button_restart.y = display.contentCenterY - 120
+    button_restart:scale(0.3, 0.3)
 
-    game_over_page_group:insert(button2)
-    button2.x = display.contentCenterX - 170
-    button2.y = display.contentCenterY - 70
-    button2:scale(0.3, 0.3)
+    game_over_page_group:insert(button_back_to_menu)
+    button_back_to_menu.x = display.contentCenterX - 170
+    button_back_to_menu.y = display.contentCenterY - 70
+    button_back_to_menu:scale(0.3, 0.3)
 
 end
 
@@ -163,17 +163,17 @@ function M.showMenu()
              gv.game_state = 'PLAY'
            end
        end
-    local button1 = widget.newButton(
+    local button_play = widget.newButton(
         {
             defaultFile = "resources/graphics/startbutton.png",
             overFile = "resources/graphics/startbutton_active.png",
             onEvent = handleButtonEvent
         }
     )
-    menu_page_group:insert(button1)
-    button1.x = display.contentCenterX
-    button1.y = display.contentCenterY - 20
-    button1:scale(0.4, 0.4)
+    menu_page_group:insert(button_play)
+    button_play.x = display.contentCenterX
+    button_play.y = display.contentCenterY - 20
+    button_play:scale(0.4, 0.4)
 
     local function handleButtonEvent2( event )
         if ( "ended" == event.phase ) then
@@ -182,17 +182,17 @@ function M.showMenu()
           gv.game_state = 'HELP'
         end
     end
-    local button2 = widget.newButton(
+    local button_help = widget.newButton(
         {
             defaultFile = "resources/graphics/startbutton2.png",
             overFile = "resources/graphics/startbutton_active.png",
             onEvent = handleButtonEvent2
         }
     )
-    menu_page_group:insert(button2)
-    button2.x = display.contentCenterX
-    button2.y = display.contentCenterY + 50
-    button2:scale(0.4, 0.4)
+    menu_page_group:insert(button_help)
+    button_help.x = display.contentCenterX
+    button_help.y = display.contentCenterY + 50
+    button_help:scale(0.4, 0.4)
 
     local function handleButtonEvent3( event )
         if ( "ended" == event.phase ) then
@@ -201,17 +201,17 @@ function M.showMenu()
           gv.game_state = 'CREDITS'
         end
     end
-    local button3 = widget.newButton(
+    local button_credits = widget.newButton(
         {
             defaultFile = "resources/graphics/startbutton2.png",
             overFile = "resources/graphics/startbutton_active.png",
             onEvent = handleButtonEvent3
         }
     )
-    menu_page_group:insert(button3)
-    button3.x = display.contentCenterX
-    button3.y = display.contentCenterY + 120
-    button3:scale(0.4, 0.4)
+    menu_page_group:insert(button_credits)
+    button_credits.x = display.contentCenterX
+    button_credits.y = display.contentCenterY + 120
+    button_credits:scale(0.4, 0.4)
 
 end
 
@@ -230,17 +230,17 @@ function M.showHelp()
           end
     end
 
-      local button = widget.newButton(
+      local button_back_to_menu = widget.newButton(
           {
             defaultFile = "resources/graphics/startbutton2.png",
             overFile = "resources/graphics/startbutton_active.png",
             onEvent = handleButtonEvent 
           }
       )
-      help_page_group:insert(button)
-      button.x = display.contentCenterX
-      button.y = display.contentCenterY + 100
-      button:scale(0.3, 0.3)
+      help_page_group:insert(button_back_to_menu)
+      button_back_to_menu.x = display.contentCenterX
+      button_back_to_menu.y = display.contentCenterY + 100
+      button_back_to_menu:scale(0.3, 0.3)
 end
 
 function M.showCredits()
@@ -248,7 +248,7 @@ function M.showCredits()
     local credits_page_group = display.newGroup()
     local rect = display.newRect(credits_page_group, display.contentCenterX, display.contentCenterY, display.contentWidth + 100, display.contentHeight + 100)
     rect:setFillColor(0.5)
-    local myText = display.newText( credits_page_group, "HELP", display.contentCenterX, display.contentCenterY - 100, "Munro.ttf", 50 )
+    local myText = display.newText( credits_page_group, "CREDITS", display.contentCenterX, display.contentCenterY - 100, "Munro.ttf", 50 )
     
     local function handleButtonEvent(event)
         if ( "ended" == event.phase ) then
@@ -258,17 +258,17 @@ function M.showCredits()
           end
     end
 
-      local button = widget.newButton(
+      local button_back_to_menu = widget.newButton(
           {
             defaultFile = "resources/graphics/startbutton2.png",
             overFile = "resources/graphics/startbutton_active.png",
             onEvent = handleButtonEvent 
           }
       )
-      credits_page_group:insert(button)
-      button.x = display.contentCenterX
-      button.y = display.contentCenterY + 100
-      button:scale(0.3, 0.3)
+      credits_page_group:insert(button_back_to_menu)
+      button_back_to_menu.x = display.contentCenterX
+      button_back_to_menu.y = display.contentCenterY + 100
+      button_back_to_menu:scale(0.3, 0.3)
 end
 
 

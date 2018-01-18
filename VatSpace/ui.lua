@@ -172,7 +172,7 @@ function M.showMenu()
     )
     menu_page_group:insert(button1)
     button1.x = display.contentCenterX
-    button1.y = display.contentCenterY
+    button1.y = display.contentCenterY - 20
     button1:scale(0.4, 0.4)
 
     local function handleButtonEvent2( event )
@@ -191,8 +191,28 @@ function M.showMenu()
     )
     menu_page_group:insert(button2)
     button2.x = display.contentCenterX
-    button2.y = display.contentCenterY + 70
+    button2.y = display.contentCenterY + 50
     button2:scale(0.4, 0.4)
+
+    local function handleButtonEvent3( event )
+        if ( "ended" == event.phase ) then
+          menu_page_group:removeSelf()
+          menu_page_group = nil
+          gv.game_state = 'CREDITS'
+        end
+    end
+    local button3 = widget.newButton(
+        {
+            defaultFile = "resources/graphics/startbutton2.png",
+            overFile = "resources/graphics/startbutton_active.png",
+            onEvent = handleButtonEvent3
+        }
+    )
+    menu_page_group:insert(button3)
+    button3.x = display.contentCenterX
+    button3.y = display.contentCenterY + 120
+    button3:scale(0.4, 0.4)
+
 end
 
 function M.showHelp()

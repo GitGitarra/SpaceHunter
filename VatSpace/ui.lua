@@ -157,16 +157,25 @@ function M.showMenu()
     local gameName = display.newImage( menu_page_group, "resources/graphics/The-Vat-Hunter.png",display.contentCenterX, display.contentCenterY - 75)
     rect:setFillColor(0)
     local function handleButtonEvent( event )
-           if ( "ended" == event.phase ) then
-             menu_page_group:removeSelf()
-             menu_page_group = nil
+           if ( "ended" == event.phase and event.target.id == "play") then
+                menu_page_group:removeSelf()
+                menu_page_group = nil
              gv.game_state = 'PLAY'
+            elseif ( "ended" == event.phase and event.target.id == "help" ) then
+                menu_page_group:removeSelf()
+                menu_page_group = nil
+                gv.game_state = 'HELP'
+            elseif ( "ended" == event.phase and event.target.id == "credits") then
+                menu_page_group:removeSelf()
+                menu_page_group = nil
+                gv.game_state = 'CREDITS'
            end
        end
     local button_play = widget.newButton(
         {
             defaultFile = "resources/graphics/startbutton.png",
             overFile = "resources/graphics/startbutton_active.png",
+            id = "play",
             onEvent = handleButtonEvent
         }
     )
@@ -175,18 +184,12 @@ function M.showMenu()
     button_play.y = display.contentCenterY - 20
     button_play:scale(0.4, 0.4)
 
-    local function handleButtonEvent2( event )
-        if ( "ended" == event.phase ) then
-          menu_page_group:removeSelf()
-          menu_page_group = nil
-          gv.game_state = 'HELP'
-        end
-    end
     local button_help = widget.newButton(
         {
             defaultFile = "resources/graphics/startbutton2.png",
             overFile = "resources/graphics/startbutton_active.png",
-            onEvent = handleButtonEvent2
+            id = "help",
+            onEvent = handleButtonEvent
         }
     )
     menu_page_group:insert(button_help)
@@ -194,18 +197,12 @@ function M.showMenu()
     button_help.y = display.contentCenterY + 50
     button_help:scale(0.4, 0.4)
 
-    local function handleButtonEvent3( event )
-        if ( "ended" == event.phase ) then
-          menu_page_group:removeSelf()
-          menu_page_group = nil
-          gv.game_state = 'CREDITS'
-        end
-    end
     local button_credits = widget.newButton(
         {
             defaultFile = "resources/graphics/startbutton2.png",
             overFile = "resources/graphics/startbutton_active.png",
-            onEvent = handleButtonEvent3
+            id = "credits",
+            onEvent = handleButtonEvent
         }
     )
     menu_page_group:insert(button_credits)

@@ -173,42 +173,42 @@ function M.showMenu()
     end
     local button_play = widget.newButton(
         {
-            defaultFile = "resources/graphics/startbutton.png",
-            overFile = "resources/graphics/startbutton_active.png",
+            defaultFile = "resources/graphics/btn_play.png",
+            overFile = "resources/graphics/btn_play_onclick.png",
             id = "play",
             onEvent = handleButtonEvent
         }
     )
     menu_page_group:insert(button_play)
     button_play.x = display.contentCenterX
-    button_play.y = display.contentCenterY - 20
-    button_play:scale(0.4, 0.4)
+    button_play.y = display.contentCenterY - 32
+    button_play:scale(1.2, 1.2)
     
     local button_help = widget.newButton(
         {
-            defaultFile = "resources/graphics/startbutton2.png",
-            overFile = "resources/graphics/startbutton_active.png",
+            defaultFile = "resources/graphics/btn_help.png",
+            overFile = "resources/graphics/btn_help_onclick.png",
             id = "help",
             onEvent = handleButtonEvent
         }
     )
     menu_page_group:insert(button_help)
     button_help.x = display.contentCenterX
-    button_help.y = display.contentCenterY + 50
-    button_help:scale(0.4, 0.4)
+    button_help.y = display.contentCenterY + 5
+    button_help:scale(1.2, 1.2)
     
     local button_credits = widget.newButton(
         {
-            defaultFile = "resources/graphics/startbutton2.png",
-            overFile = "resources/graphics/startbutton_active.png",
+            defaultFile = "resources/graphics/btn_credits.png",
+            overFile = "resources/graphics/btn_credits_onclick.png",
             id = "credits",
             onEvent = handleButtonEvent
         }
     )
     menu_page_group:insert(button_credits)
     button_credits.x = display.contentCenterX
-    button_credits.y = display.contentCenterY + 120
-    button_credits:scale(0.4, 0.4)
+    button_credits.y = display.contentCenterY + 42
+    button_credits:scale(1.2, 1.2)
 
 end
 

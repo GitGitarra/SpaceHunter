@@ -9,7 +9,7 @@ function M.create()
         height = 281,
         numFrames = 18
     }
-    local space_background = graphics.newImageSheet( "resources/graphics/space.png", sheetOptions )
+    local space_background = graphics.newImageSheet( "resources/graphics/space_bg.png", sheetOptions )
     local sequences_spaceStars = {
         {
             name = "background",

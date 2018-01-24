@@ -212,7 +212,7 @@ function M.showMenu()
 end
 
 function M.showHelp()
-    gv.game_state = 'HELP'
+    gv.game_state = 'IN_MENU'
     local help_page_group = display.newGroup()
     local rect = display.newRect(help_page_group, display.contentCenterX, display.contentCenterY, display.contentWidth + 100, display.contentHeight + 100)
     rect:setFillColor(0.3)
@@ -240,7 +240,7 @@ function M.showHelp()
 end
 
 function M.showCredits()
-    gv.game_state = 'CREDITS'
+    gv.game_state = 'IN_MENU'
     local credits_page_group = display.newGroup()
     local rect = display.newRect(credits_page_group, display.contentCenterX, display.contentCenterY, display.contentWidth + 100, display.contentHeight + 100)
     rect:setFillColor(0.5)

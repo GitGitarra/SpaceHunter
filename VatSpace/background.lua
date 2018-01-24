@@ -21,7 +21,9 @@ function M.create()
         }
     }
     M.background = display.newSprite( space_background, sequences_spaceStars )
-    M.background:scale(2.5,2.5)
+    M.background.x = display.contentCenterX
+    M.background.y = display.contentCenterY
+    M.background:scale(1.15,1.15)
     M.background:play()
 end
 

@@ -182,7 +182,7 @@ function M.showMenu()
     menu_page_group:insert(button_play)
     button_play.x = display.contentCenterX
     button_play.y = display.contentCenterY - 32
-    button_play:scale(1.15, 1.15)
+    button_play:scale(1.2, 1.2)
     
     local button_help = widget.newButton(
         {

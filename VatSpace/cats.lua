@@ -14,8 +14,10 @@ end
 
 local function tapCatInSpace(event)
     if ( event.phase == "ended" ) then
-        gv.time = gv.time + 10
-        print(gv.time)
+        if (event.target.hasTime) then
+            gv.time = gv.time + 10
+            event.target.hasTime = false
+        end
     end
     return true
 end
@@ -23,6 +25,7 @@ end
 local function randomizeFieldsFor(cat)
     cat.speed = math.random() + math.random(2, 5)
     cat.moneyAmount = math.random(1, 5)
+    cat.hasTime = true
     cat.x = math.random(display.contentWidth + 50, display.contentWidth + 350)
     cat.y = math.random(50, display.contentHeight-60)
 end
@@ -31,6 +34,7 @@ local function createCatInSpace()
     for i=1,1 do
         cat = display.newImage("resources/graphics/cat.png")
         cat.speed = 10
+        cat.hasTime = true
         scaleRandom = math.random(1, 1.5)
         cat:scale(scaleRandom, scaleRandom)
         cat.x = math.random(display.contentWidth + 50, display.contentWidth + 350)

@@ -1,6 +1,7 @@
 local widget = require("widget")
 local gv = require("gamevariables")
 local sounds = require("sounds")
+local background = require( "background" )
 
 local M = {}
 
@@ -214,13 +215,28 @@ end
 
 function M.showHelp()
     gv.game_state = 'IN_MENU'
-    local help_page_group = display.newGroup()
-    local rect = display.newRect(help_page_group, display.contentCenterX, display.contentCenterY, display.contentWidth + 100, display.contentHeight + 100)
-    rect:setFillColor(0.3)
+    background.create()
+    local help_page_group = display.newGroup()    
     local myText = display.newText(help_page_group, "HELP", display.contentCenterX, display.contentCenterY - 100, "Munro.ttf", 50)
-    
+    local options = 
+    {
+        text = "To help Matt collect VAT tap (icon of asteroid) as long as they giving you money."..
+                        "Avoid (icon of church) they are tax free and you will loose money."..
+                         "(icon of cat) is here to help you, catch him to get extra time.".. 
+                         "To reach next level you need collect enough money to fill progress bar before your time runs out.",    
+        x = display.contentCenterX,
+        y = display.contentCenterY,
+        width = 300,
+        font = "Munro.ttf",   
+        fontSize = 15,
+        align = "center"
+    }
+    local helpText = display.newText( options )
+    help_page_group:insert(helpText)
+
     local function handleButtonEvent(event)
         if ("ended" == event.phase) then
+            background.destroy()
             help_page_group:removeSelf()
             help_page_group = nil
             gv.game_state = 'MENU'
@@ -246,7 +262,7 @@ function M.showCredits()
     local rect = display.newRect(credits_page_group, display.contentCenterX, display.contentCenterY, display.contentWidth + 100, display.contentHeight + 100)
     rect:setFillColor(0.5)
     local myText = display.newText(credits_page_group, "CREDITS", display.contentCenterX, display.contentCenterY - 100, "Munro.ttf", 50)
-    
+
     local function handleButtonEvent(event)
         if ("ended" == event.phase) then
             credits_page_group:removeSelf()

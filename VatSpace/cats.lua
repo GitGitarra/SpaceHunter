@@ -11,7 +11,6 @@ local function moveCat(cat)
     cat.x = cat.x - cat.speed
 end
 
-
 local function tapCatInSpace(event)
     if ( event.phase == "ended" ) then
         if (event.target.hasTime) then
@@ -24,18 +23,18 @@ end
 
 local function randomizeFieldsFor(cat)
     cat.speed = math.random() + math.random(2, 5)
-    cat.moneyAmount = math.random(1, 5)
     cat.hasTime = true
     cat.x = math.random(display.contentWidth + 50, display.contentWidth + 350)
     cat.y = math.random(50, display.contentHeight-60)
 end
 
 local function createCatInSpace()
-    for i=1,1 do
+    for i=1,3 do
         cat = display.newImage("resources/graphics/cat.png")
-        cat.speed = 10
+        cat.speed = 0
         cat.hasTime = true
         scaleRandom = math.random(1, 1.5)
+        randomizeFieldsFor(cat)
         cat:scale(scaleRandom, scaleRandom)
         cat.x = math.random(display.contentWidth + 50, display.contentWidth + 350)
         cat.y = math.random(50, display.contentHeight-60)
@@ -49,7 +48,7 @@ function M.move()
     for i=1,#M.cats do
         a = M.cats[i]
         moveCat(a)
-        if a.x < -50 then
+        if a.x < -50 then  
             randomizeFieldsFor(a)
         end
     end

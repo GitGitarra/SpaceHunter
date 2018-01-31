@@ -247,15 +247,15 @@ function M.showHelp()
     
     local button_back_to_menu = widget.newButton(
         {
-            defaultFile = "resources/graphics/startbutton2.png",
-            overFile = "resources/graphics/startbutton_active.png",
+            defaultFile = "resources/graphics/help_window_btn.png",
+            overFile = "resources/graphics/help_window_btn_onclick.png",
             onEvent = handleButtonEvent
         }
     )
     help_page_group:insert(button_back_to_menu)
-    button_back_to_menu.x = display.contentCenterX
-    button_back_to_menu.y = display.contentCenterY + 100
-    button_back_to_menu:scale(0.3, 0.3)
+    button_back_to_menu.x = display.contentCenterX + 4
+    button_back_to_menu.y = display.contentCenterY + 85
+    button_back_to_menu:scale(1.2, 1.2)
 end
 
 function M.showCredits()

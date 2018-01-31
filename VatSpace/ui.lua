@@ -216,8 +216,9 @@ end
 function M.showHelp()
     gv.game_state = 'IN_MENU'
     background.create()
-    local help_page_group = display.newGroup()    
-    local myText = display.newText(help_page_group, "HELP", display.contentCenterX, display.contentCenterY - 100, "Munro.ttf", 50)
+    local help_page_group = display.newGroup()
+    local helpFrame = display.newImage(help_page_group, "resources/graphics/help__window_frame.png", display.contentCenterX, display.contentCenterY - 20)    
+    helpFrame:scale(1.2,1.2)
     local options = 
     {
         text = "To help Matt collect VAT tap (icon of asteroid) as long as they giving you money."..
@@ -232,6 +233,7 @@ function M.showHelp()
         align = "center"
     }
     local helpText = display.newText( options )
+    helpText:setFillColor(0.156, 0.133, 0.156)
     help_page_group:insert(helpText)
 
     local function handleButtonEvent(event)

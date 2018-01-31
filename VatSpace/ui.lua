@@ -217,7 +217,7 @@ function M.showHelp()
     gv.game_state = 'IN_MENU'
     background.create()
     local help_page_group = display.newGroup()
-    local helpFrame = display.newImage(help_page_group, "resources/graphics/help__window_frame.png", display.contentCenterX, display.contentCenterY - 20)    
+    local helpFrame = display.newImage(help_page_group, "resources/graphics/help__window_frame.png", display.contentCenterX, display.contentCenterY - 3)    
     helpFrame:scale(1.2,1.2)
     local options = 
     {
@@ -254,19 +254,20 @@ function M.showHelp()
     )
     help_page_group:insert(button_back_to_menu)
     button_back_to_menu.x = display.contentCenterX + 4
-    button_back_to_menu.y = display.contentCenterY + 85
+    button_back_to_menu.y = display.contentCenterY + 102
     button_back_to_menu:scale(1.2, 1.2)
 end
 
 function M.showCredits()
     gv.game_state = 'IN_MENU'
+    background.create()
     local credits_page_group = display.newGroup()
-    local rect = display.newRect(credits_page_group, display.contentCenterX, display.contentCenterY, display.contentWidth + 100, display.contentHeight + 100)
-    rect:setFillColor(0.5)
-    local myText = display.newText(credits_page_group, "CREDITS", display.contentCenterX, display.contentCenterY - 100, "Munro.ttf", 50)
+    local creditsFrame = display.newImage(credits_page_group, "resources/graphics/credits_window_frame.png", display.contentCenterX, display.contentCenterY - 3)    
+    creditsFrame:scale(1.2,1.2)
 
     local function handleButtonEvent(event)
         if ("ended" == event.phase) then
+            background.destroy()
             credits_page_group:removeSelf()
             credits_page_group = nil
             gv.game_state = 'MENU'
@@ -275,15 +276,15 @@ function M.showCredits()
     
     local button_back_to_menu = widget.newButton(
         {
-            defaultFile = "resources/graphics/startbutton2.png",
-            overFile = "resources/graphics/startbutton_active.png",
+            defaultFile = "resources/graphics/help_window_btn.png",
+            overFile = "resources/graphics/help_window_btn_onclick.png",
             onEvent = handleButtonEvent
         }
     )
     credits_page_group:insert(button_back_to_menu)
-    button_back_to_menu.x = display.contentCenterX
-    button_back_to_menu.y = display.contentCenterY + 100
-    button_back_to_menu:scale(0.3, 0.3)
+    button_back_to_menu.x = display.contentCenterX + 4
+    button_back_to_menu.y = display.contentCenterY + 102
+    button_back_to_menu:scale(1.2, 1.2)
 end
 
 

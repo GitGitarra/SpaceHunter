@@ -217,25 +217,29 @@ function M.showHelp()
     gv.game_state = 'IN_MENU'
     background.create()
     local help_page_group = display.newGroup()
-    local helpFrame = display.newImage(help_page_group, "resources/graphics/help__window_frame.png", display.contentCenterX, display.contentCenterY - 3)    
+    local helpFrame = display.newImage(help_page_group, "resources/graphics/help__window_frame.png", 
+                                       display.contentCenterX, display.contentCenterY - 3)    
     helpFrame:scale(1.2,1.2)
     local options = 
     {
         text = "To help Matt collect VAT tap (icon of asteroid) as long as they giving you money."..
                         "Avoid (icon of church) they are tax free and you will loose money."..
-                         "(icon of cat) is here to help you, catch him to get extra time.".. 
+                         "      is here to help you, catch him to get extra time.".. 
                          "To reach next level you need collect enough money to fill progress bar before your time runs out.",    
         x = display.contentCenterX,
-        y = display.contentCenterY,
+        y = display.contentCenterY + 5,
         width = 300,
         font = "Munro.ttf",   
-        fontSize = 15,
+        fontSize = 17,
         align = "center"
     }
     local helpText = display.newText( options )
     helpText:setFillColor(0.156, 0.133, 0.156)
     help_page_group:insert(helpText)
 
+    local cat = display.newImage(help_page_group, "resources/graphics/cat.png",
+                                display.contentCenterX - 90, display.contentCenterY)
+    cat:scale(0.7,0.7)
     local function handleButtonEvent(event)
         if ("ended" == event.phase) then
             background.destroy()
@@ -262,8 +266,31 @@ function M.showCredits()
     gv.game_state = 'IN_MENU'
     background.create()
     local credits_page_group = display.newGroup()
-    local creditsFrame = display.newImage(credits_page_group, "resources/graphics/credits_window_frame.png", display.contentCenterX, display.contentCenterY - 3)    
+    local creditsFrame = display.newImage(credits_page_group, "resources/graphics/credits_window_frame.png", 
+                                            display.contentCenterX, display.contentCenterY - 3)    
     creditsFrame:scale(1.2,1.2)
+
+    local options = 
+    {
+        text = "Design and Development "..
+                        "       Stefan Kania       "..
+                         "        Monika Płocica        ".. 
+                         "      Graphic Designer      "..
+                         "             Olga Płocica             "..
+                         "    Sounds and Music   "..
+                         "                         "..
+                         "                COTA GAMES                "..
+                         "        All rights reserved        ",    
+        x = display.contentCenterX,
+        y = display.contentCenterY + 5,
+        width = 180,
+        font = "Munro.ttf",   
+        fontSize = 15,
+        align = "center"
+    }
+    local creditsText = display.newText( options )
+    creditsText:setFillColor(0.156, 0.133, 0.156)
+    credits_page_group:insert(creditsText)
 
     local function handleButtonEvent(event)
         if ("ended" == event.phase) then

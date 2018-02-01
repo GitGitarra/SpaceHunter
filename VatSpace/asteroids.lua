@@ -58,10 +58,8 @@ local function createCoinAsteroids()
         asteroid.speed = 0
         asteroid.moneyAmount = 0
         randomizeFieldsFor(asteroid)
-        scaleRandom = math.random(10, 16) / 100
+        scaleRandom = math.random(1, 1.5)
         asteroid:scale(scaleRandom, scaleRandom)
-        asteroid.fill.effect = "filter.pixelate"
-        asteroid.fill.effect.numPixels = 20
         asteroid:addEventListener( "touch", tapAsteroid )
         M.asteroids[i] = asteroid
     end
@@ -73,10 +71,8 @@ local function createSaintAsteroids()
         church_asteroid.speed = 0
         church_asteroid.moneyAmount = 0
         randomizeFieldsFor(church_asteroid)
-        scaleRandom = math.random(1, 1.5) / 100
+        scaleRandom = math.random(1, 1.5)
         church_asteroid:scale(scaleRandom, scaleRandom)
-        --church_asteroid.fill.effect = "filter.pixelate"
-        --church_asteroid.fill.effect.numPixels = 15
         church_asteroid:addEventListener( "touch", tapSaintAsteroid )
         M.asteroids[i] =church_asteroid
     end
@@ -94,10 +90,8 @@ local function createAsteroids()
         asteroid.speed = 0
         asteroid.moneyAmount = 0
         randomizeFieldsFor(asteroid)
-        scaleRandom = math.random(8, 14) / 100
+        scaleRandom = math.random(1, 1.5)
         asteroid:scale(scaleRandom, scaleRandom)
-        asteroid.fill.effect = "filter.pixelate"
-        asteroid.fill.effect.numPixels = 20
         M.asteroids[i] = asteroid
     end
 end

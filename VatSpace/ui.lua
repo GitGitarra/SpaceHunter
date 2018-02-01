@@ -152,11 +152,11 @@ end
 
 function M.showMenu()
     gv.game_state = 'IN_MENU'
+    background.create()
     local menu_page_group = display.newGroup()
-    local rect = display.newRect(menu_page_group, display.contentCenterX, display.contentCenterY, display.contentWidth + 100, display.contentHeight + 100)
-    local menuBackground = display.newImage(menu_page_group, "resources/graphics/menu_bg.png", display.contentCenterX, display.contentCenterY)
-    menuBackground:scale(1.2, 1.2)
-    rect:setFillColor(0)
+    local menuFrame = display.newImage(menu_page_group, "resources/graphics/menu_window_frame.png", 
+    display.contentCenterX, display.contentCenterY - 1)    
+    menuFrame:scale(1.2,1.2)
     local function handleButtonEvent(event)
         if ("ended" == event.phase and event.target.id == "play") then
             menu_page_group:removeSelf()

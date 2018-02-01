@@ -11,15 +11,31 @@ local function moveCat(cat)
     cat.x = cat.x - cat.speed
 end
 
+local function showExtraTime(x, y)
+    local time = display.newText("+10s", x, y, "munro.ttf", 15)
+    timer.performWithDelay(35, function(event)
+        time.y = time.y - 1
+        if event.count == 10 then
+            time:removeSelf()
+            time=nil
+        end
+    end, 10)
+end
+
 local function tapCatInSpace(event)
     if ( event.phase == "ended" ) then
-        if (event.target.hasTime) then
+        cat = event.target
+        if (cat.hasTime) then
+            print(cat.x)
+            showExtraTime(cat.x + 10, cat.y - 25)
             gv.time = gv.time + 10
-            event.target.hasTime = false
+            cat.hasTime = false
         end
     end
     return true
 end
+
+
 
 local function randomizeFieldsFor(cat)
     cat.speed = math.random() + math.random(2, 5)

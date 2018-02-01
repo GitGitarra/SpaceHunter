@@ -124,16 +124,16 @@ function M.showGameOverScreen()
     
     local button_restart = widget.newButton(
         {
-            defaultFile = "resources/graphics/startbutton.png",
-            overFile = "resources/graphics/startbutton_active.png",
+            defaultFile = "resources/graphics/btn_play.png",
+            overFile = "resources/graphics/btn_play_onclick.png",
             id = "restart",
             onEvent = handleButtonEvent
         }
     )
     local button_back_to_menu = widget.newButton(
         {
-            defaultFile = "resources/graphics/startbutton2.png",
-            overFile = "resources/graphics/startbutton_active.png",
+            defaultFile = "resources/graphics/help_window_btn.png",
+            overFile = "resources/graphics/help_window_btn_onclick.png",
             id = "menu",
             onEvent = handleButtonEvent
         }
@@ -141,12 +141,12 @@ function M.showGameOverScreen()
     game_over_page_group:insert(button_restart)
     button_restart.x = display.contentCenterX - 170
     button_restart.y = display.contentCenterY - 120
-    button_restart:scale(0.3, 0.3)
+    button_restart:scale(1, 1)
     
     game_over_page_group:insert(button_back_to_menu)
     button_back_to_menu.x = display.contentCenterX - 170
     button_back_to_menu.y = display.contentCenterY - 70
-    button_back_to_menu:scale(0.3, 0.3)
+    button_back_to_menu:scale(1, 1)
 
 end
 

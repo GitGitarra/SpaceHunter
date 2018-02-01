@@ -69,14 +69,14 @@ end
 
 local function createSaintAsteroids()
     for i=#M.asteroids,#M.asteroids+2 do
-        church_asteroid = display.newImage( "resources/graphics/church1.png" )
+        church_asteroid = display.newImage( "resources/graphics/church.png" )
         church_asteroid.speed = 0
         church_asteroid.moneyAmount = 0
         randomizeFieldsFor(church_asteroid)
-        scaleRandom = math.random(15, 25) / 100
+        scaleRandom = math.random(1, 1.5) / 100
         church_asteroid:scale(scaleRandom, scaleRandom)
-        church_asteroid.fill.effect = "filter.pixelate"
-        church_asteroid.fill.effect.numPixels = 15
+        --church_asteroid.fill.effect = "filter.pixelate"
+        --church_asteroid.fill.effect.numPixels = 15
         church_asteroid:addEventListener( "touch", tapSaintAsteroid )
         M.asteroids[i] =church_asteroid
     end

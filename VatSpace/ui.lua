@@ -269,28 +269,45 @@ function M.showCredits()
     local creditsFrame = display.newImage(credits_page_group, "resources/graphics/credits_window_frame.png", 
                                             display.contentCenterX, display.contentCenterY - 3)    
     creditsFrame:scale(1.2,1.2)
+    local text1 = display.newText(credits_page_group, "Design and Development", display.contentCenterX, display.contentCenterY - 60, "munro_small.ttf", 15)
+    local text2 = display.newText(credits_page_group, "Stefan Kania   Monika Płocica", display.contentCenterX, display.contentCenterY - 40, "munro.ttf", 16)
+    local text3 = display.newText(credits_page_group, "Graphic Designer", display.contentCenterX, display.contentCenterY - 20, "munro_small.ttf", 15)
+    local text4 = display.newText(credits_page_group, "Olga Płocica", display.contentCenterX, display.contentCenterY, "munro.ttf", 16)
+    local text5 = display.newText(credits_page_group, "Sounds and Music", display.contentCenterX, display.contentCenterY + 20, "munro_small.ttf", 15)
+    local text6 = display.newText(credits_page_group, "licencje i takie tam", display.contentCenterX, display.contentCenterY + 40, "munro.ttf", 15)
+    local text7 = display.newText(credits_page_group, "COTA GAMES", display.contentCenterX, display.contentCenterY + 65, "munro_small.ttf", 15)
+    local text8 = display.newText(credits_page_group, "All rights reserved", display.contentCenterX, display.contentCenterY + 77, "munro.ttf", 10)
+    text1:setFillColor(0.156, 0.133, 0.156)
+    text2:setFillColor(0.156, 0.133, 0.156)
+    text3:setFillColor(0.156, 0.133, 0.156)
+    text4:setFillColor(0.156, 0.133, 0.156)
+    text5:setFillColor(0.156, 0.133, 0.156)
+    text6:setFillColor(0.156, 0.133, 0.156)
+    text7:setFillColor(0.156, 0.133, 0.156)
+    text8:setFillColor(0.156, 0.133, 0.156)
+    
+    -- local options = 
+    -- {
+    --     -- text = "Design and Development "..
+    --     --                 "       Stefan Kania       "..
+    --     --                  "        Monika Płocica        ".. 
+    --     --                  "      Graphic Designer      "..
+    --     --                  "             Olga Płocica             "..
+    --     --                  "    Sounds and Music   "..
+    --     --                  "                         "..
+    --     --                  "                COTA GAMES                "..
+    --     --                  "        All rights reserved        ",    
+    --     x = display.contentCenterX,
+    --     y = display.contentCenterY + 5,
+    --     width = 180,
+    --     font = "munro_small.ttf",   
+    --     fontSize = 15,
+    --     align = "center"
+    -- }
+    -- local creditsText = display.newText( options )
+    -- creditsText:setFillColor(0.156, 0.133, 0.156)
+    -- credits_page_group:insert(creditsText)
 
-    local options = 
-    {
-        text = "Design and Development "..
-                        "       Stefan Kania       "..
-                         "        Monika Płocica        ".. 
-                         "      Graphic Designer      "..
-                         "             Olga Płocica             "..
-                         "    Sounds and Music   "..
-                         "                         "..
-                         "                COTA GAMES                "..
-                         "        All rights reserved        ",    
-        x = display.contentCenterX,
-        y = display.contentCenterY + 5,
-        width = 180,
-        font = "Munro.ttf",   
-        fontSize = 15,
-        align = "center"
-    }
-    local creditsText = display.newText( options )
-    creditsText:setFillColor(0.156, 0.133, 0.156)
-    credits_page_group:insert(creditsText)
 
     local function handleButtonEvent(event)
         if ("ended" == event.phase) then

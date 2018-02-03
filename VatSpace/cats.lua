@@ -26,6 +26,7 @@ local function tapCatInSpace(event)
     if ( event.phase == "ended" ) then
         cat = event.target
         if (cat.hasTime) then
+            sounds.playCatMeow()
             showExtraTime(cat.x + 10, cat.y - 25)
             gv.time = gv.time + 10
             cat.hasTime = false
@@ -49,7 +50,6 @@ local function randomizeFieldsFor(cat)
 end
 
 local function createCatInSpace()
-        print("jestem w metodzie createCatInSpace")
         cat = display.newImage("resources/graphics/cat.png")
         cat.speed = 0
         cat.hasTime = true

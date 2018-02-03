@@ -1,11 +1,11 @@
--- cats module
+-- cat module
 local sounds = require( "sounds" )
 local ui = require( "ui" )
 local gv = require( "gamevariables" )
 
 local M = {}
 
-M.cats = {}
+M.cat = nil
 
 local function moveCat(cat)
     cat.x = cat.x - cat.speed
@@ -26,7 +26,6 @@ local function tapCatInSpace(event)
     if ( event.phase == "ended" ) then
         cat = event.target
         if (cat.hasTime) then
-            print(cat.x)
             showExtraTime(cat.x + 10, cat.y - 25)
             gv.time = gv.time + 10
             cat.hasTime = false
@@ -35,39 +34,41 @@ local function tapCatInSpace(event)
     return true
 end
 
-
-
 local function randomizeFieldsFor(cat)
+    cat.isVisible = false
+    visibilty = {false, false, true}
+    x = math.random(1, 3)
+    cat.isVisible = visibilty[x]
+    scaleRandom = math.random(1, 1.5)
+    cat:scale(scaleRandom, scaleRandom)
     cat.speed = math.random() + math.random(2, 5)
     cat.hasTime = true
     cat.x = math.random(display.contentWidth + 50, display.contentWidth + 350)
     cat.y = math.random(50, display.contentHeight-60)
+
 end
 
 local function createCatInSpace()
-    for i=1,3 do
+        print("jestem w metodzie createCatInSpace")
         cat = display.newImage("resources/graphics/cat.png")
         cat.speed = 0
         cat.hasTime = true
-        scaleRandom = math.random(1, 1.5)
+        cat.isVisible = false
         randomizeFieldsFor(cat)
-        cat:scale(scaleRandom, scaleRandom)
         cat.x = math.random(display.contentWidth + 50, display.contentWidth + 350)
         cat.y = math.random(50, display.contentHeight-60)
         cat:addEventListener( "touch", tapCatInSpace )
-        cat.id = "cat"
-        M.cats[i] = cat
-    end
+        M.cat = cat
 end
 
-function M.move()
-    for i=1,#M.cats do
-        a = M.cats[i]
+function M.move() 
+        a = M.cat
         moveCat(a)
         if a.x < -50 then  
+            M.destroy()
+            createCatInSpace()
             randomizeFieldsFor(a)
         end
-    end
 end
 
 function M.create(g)
@@ -75,10 +76,8 @@ function M.create(g)
 end
 
 function M.destroy()
-    for i=1,#M.cats do
-        M.cats[i]:removeSelf()
-        M.cats[i] = nil
-    end
+    M.cat:removeSelf()
+    M.cat = nil
 end
 
 return M

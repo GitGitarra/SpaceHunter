@@ -286,29 +286,6 @@ function M.showCredits()
     text7:setFillColor(0.156, 0.133, 0.156)
     text8:setFillColor(0.156, 0.133, 0.156)
     
-    -- local options = 
-    -- {
-    --     -- text = "Design and Development "..
-    --     --                 "       Stefan Kania       "..
-    --     --                  "        Monika Płocica        ".. 
-    --     --                  "      Graphic Designer      "..
-    --     --                  "             Olga Płocica             "..
-    --     --                  "    Sounds and Music   "..
-    --     --                  "                         "..
-    --     --                  "                COTA GAMES                "..
-    --     --                  "        All rights reserved        ",    
-    --     x = display.contentCenterX,
-    --     y = display.contentCenterY + 5,
-    --     width = 180,
-    --     font = "munro_small.ttf",   
-    --     fontSize = 15,
-    --     align = "center"
-    -- }
-    -- local creditsText = display.newText( options )
-    -- creditsText:setFillColor(0.156, 0.133, 0.156)
-    -- credits_page_group:insert(creditsText)
-
-
     local function handleButtonEvent(event)
         if ("ended" == event.phase) then
             background.destroy()

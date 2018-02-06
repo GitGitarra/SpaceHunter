@@ -1,6 +1,7 @@
 local widget = require("widget")
 local gv = require("gamevariables")
 local sounds = require("sounds")
+local background = require( "background" )
 
 local M = {}
 
@@ -123,16 +124,16 @@ function M.showGameOverScreen()
     
     local button_restart = widget.newButton(
         {
-            defaultFile = "resources/graphics/startbutton.png",
-            overFile = "resources/graphics/startbutton_active.png",
+            defaultFile = "resources/graphics/btn_play.png",
+            overFile = "resources/graphics/btn_play_onclick.png",
             id = "restart",
             onEvent = handleButtonEvent
         }
     )
     local button_back_to_menu = widget.newButton(
         {
-            defaultFile = "resources/graphics/startbutton2.png",
-            overFile = "resources/graphics/startbutton_active.png",
+            defaultFile = "resources/graphics/help_window_btn.png",
+            overFile = "resources/graphics/help_window_btn_onclick.png",
             id = "menu",
             onEvent = handleButtonEvent
         }
@@ -140,22 +141,22 @@ function M.showGameOverScreen()
     game_over_page_group:insert(button_restart)
     button_restart.x = display.contentCenterX - 170
     button_restart.y = display.contentCenterY - 120
-    button_restart:scale(0.3, 0.3)
+    button_restart:scale(1, 1)
     
     game_over_page_group:insert(button_back_to_menu)
     button_back_to_menu.x = display.contentCenterX - 170
     button_back_to_menu.y = display.contentCenterY - 70
-    button_back_to_menu:scale(0.3, 0.3)
+    button_back_to_menu:scale(1, 1)
 
 end
 
 function M.showMenu()
     gv.game_state = 'IN_MENU'
+    background.create()
     local menu_page_group = display.newGroup()
-    local rect = display.newRect(menu_page_group, display.contentCenterX, display.contentCenterY, display.contentWidth + 100, display.contentHeight + 100)
-    local menuBackground = display.newImage(menu_page_group, "resources/graphics/menu_bg.png", display.contentCenterX, display.contentCenterY)
-    menuBackground:scale(1.2, 1.2)
-    rect:setFillColor(0)
+    local menuFrame = display.newImage(menu_page_group, "resources/graphics/menu_window_frame.png", 
+    display.contentCenterX, display.contentCenterY - 1)    
+    menuFrame:scale(1.2,1.2)
     local function handleButtonEvent(event)
         if ("ended" == event.phase and event.target.id == "play") then
             menu_page_group:removeSelf()
@@ -182,7 +183,7 @@ function M.showMenu()
     menu_page_group:insert(button_play)
     button_play.x = display.contentCenterX
     button_play.y = display.contentCenterY - 32
-    button_play:scale(1.15, 1.15)
+    button_play:scale(1.2, 1.2)
     
     local button_help = widget.newButton(
         {
@@ -214,13 +215,34 @@ end
 
 function M.showHelp()
     gv.game_state = 'IN_MENU'
+    background.create()
     local help_page_group = display.newGroup()
-    local rect = display.newRect(help_page_group, display.contentCenterX, display.contentCenterY, display.contentWidth + 100, display.contentHeight + 100)
-    rect:setFillColor(0.3)
-    local myText = display.newText(help_page_group, "HELP", display.contentCenterX, display.contentCenterY - 100, "Munro.ttf", 50)
-    
+    local helpFrame = display.newImage(help_page_group, "resources/graphics/help__window_frame.png", 
+                                       display.contentCenterX, display.contentCenterY - 3)    
+    helpFrame:scale(1.2,1.2)
+    local options = 
+    {
+        text = "To help Matt collect VAT tap (icon of asteroid) as long as they giving you money."..
+                        "Avoid (icon of church) they are tax free and you will loose money."..
+                         "      is here to help you, catch him to get extra time.".. 
+                         "To reach next level you need collect enough money to fill progress bar before your time runs out.",    
+        x = display.contentCenterX,
+        y = display.contentCenterY + 5,
+        width = 300,
+        font = "Munro.ttf",   
+        fontSize = 17,
+        align = "center"
+    }
+    local helpText = display.newText( options )
+    helpText:setFillColor(0.156, 0.133, 0.156)
+    help_page_group:insert(helpText)
+
+    local cat = display.newImage(help_page_group, "resources/graphics/cat.png",
+                                display.contentCenterX - 90, display.contentCenterY)
+    cat:scale(0.7,0.7)
     local function handleButtonEvent(event)
         if ("ended" == event.phase) then
+            background.destroy()
             help_page_group:removeSelf()
             help_page_group = nil
             gv.game_state = 'MENU'
@@ -229,26 +251,44 @@ function M.showHelp()
     
     local button_back_to_menu = widget.newButton(
         {
-            defaultFile = "resources/graphics/startbutton2.png",
-            overFile = "resources/graphics/startbutton_active.png",
+            defaultFile = "resources/graphics/help_window_btn.png",
+            overFile = "resources/graphics/help_window_btn_onclick.png",
             onEvent = handleButtonEvent
         }
     )
     help_page_group:insert(button_back_to_menu)
-    button_back_to_menu.x = display.contentCenterX
-    button_back_to_menu.y = display.contentCenterY + 100
-    button_back_to_menu:scale(0.3, 0.3)
+    button_back_to_menu.x = display.contentCenterX + 4
+    button_back_to_menu.y = display.contentCenterY + 102
+    button_back_to_menu:scale(1.2, 1.2)
 end
 
 function M.showCredits()
     gv.game_state = 'IN_MENU'
+    background.create()
     local credits_page_group = display.newGroup()
-    local rect = display.newRect(credits_page_group, display.contentCenterX, display.contentCenterY, display.contentWidth + 100, display.contentHeight + 100)
-    rect:setFillColor(0.5)
-    local myText = display.newText(credits_page_group, "CREDITS", display.contentCenterX, display.contentCenterY - 100, "Munro.ttf", 50)
+    local creditsFrame = display.newImage(credits_page_group, "resources/graphics/credits_window_frame.png", 
+                                            display.contentCenterX, display.contentCenterY - 3)    
+    creditsFrame:scale(1.2,1.2)
+    local text1 = display.newText(credits_page_group, "Design and Development", display.contentCenterX, display.contentCenterY - 60, "munro_small.ttf", 15)
+    local text2 = display.newText(credits_page_group, "Stefan Kania   Monika Płocica", display.contentCenterX, display.contentCenterY - 40, "munro.ttf", 16)
+    local text3 = display.newText(credits_page_group, "Graphic Designer", display.contentCenterX, display.contentCenterY - 20, "munro_small.ttf", 15)
+    local text4 = display.newText(credits_page_group, "Olga Płocica", display.contentCenterX, display.contentCenterY, "munro.ttf", 16)
+    local text5 = display.newText(credits_page_group, "Sounds and Music", display.contentCenterX, display.contentCenterY + 20, "munro_small.ttf", 15)
+    local text6 = display.newText(credits_page_group, "licencje i takie tam", display.contentCenterX, display.contentCenterY + 40, "munro.ttf", 15)
+    local text7 = display.newText(credits_page_group, "COTA GAMES", display.contentCenterX, display.contentCenterY + 65, "munro_small.ttf", 15)
+    local text8 = display.newText(credits_page_group, "All rights reserved", display.contentCenterX, display.contentCenterY + 77, "munro.ttf", 10)
+    text1:setFillColor(0.156, 0.133, 0.156)
+    text2:setFillColor(0.156, 0.133, 0.156)
+    text3:setFillColor(0.156, 0.133, 0.156)
+    text4:setFillColor(0.156, 0.133, 0.156)
+    text5:setFillColor(0.156, 0.133, 0.156)
+    text6:setFillColor(0.156, 0.133, 0.156)
+    text7:setFillColor(0.156, 0.133, 0.156)
+    text8:setFillColor(0.156, 0.133, 0.156)
     
     local function handleButtonEvent(event)
         if ("ended" == event.phase) then
+            background.destroy()
             credits_page_group:removeSelf()
             credits_page_group = nil
             gv.game_state = 'MENU'
@@ -257,15 +297,15 @@ function M.showCredits()
     
     local button_back_to_menu = widget.newButton(
         {
-            defaultFile = "resources/graphics/startbutton2.png",
-            overFile = "resources/graphics/startbutton_active.png",
+            defaultFile = "resources/graphics/help_window_btn.png",
+            overFile = "resources/graphics/help_window_btn_onclick.png",
             onEvent = handleButtonEvent
         }
     )
     credits_page_group:insert(button_back_to_menu)
-    button_back_to_menu.x = display.contentCenterX
-    button_back_to_menu.y = display.contentCenterY + 100
-    button_back_to_menu:scale(0.3, 0.3)
+    button_back_to_menu.x = display.contentCenterX + 4
+    button_back_to_menu.y = display.contentCenterY + 102
+    button_back_to_menu:scale(1.2, 1.2)
 end
 
 

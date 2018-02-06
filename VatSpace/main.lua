@@ -6,6 +6,7 @@
 local widget = require( "widget" )
 local background = require( "background" )
 local asteroids = require( "asteroids" )
+local cats = require("cats")
 local ui = require( "ui" )
 local gv = require( "gamevariables" )
 display.setStatusBar( display.HiddenStatusBar )
@@ -20,7 +21,10 @@ local function startTimer()
         else
             ui.timeText.text = "0:" .. tostring(gv.time) .. "s" 
         end
-    end, gv.time)
+        if gv.time <= 0 then
+            timer.cancel(event.source)
+        end
+    end, -1)
 end
 
 local function stopTimer()
@@ -47,12 +51,14 @@ local function gameOver()
     gv.game_state = 'GAME_OVER'
     stopTimer()
     asteroids.destroy()
+    cats.destroy()
     ui.showGameOverScreen()
 end
 
 local function restartGame()
     gv.setVariablesToStartValues()
     asteroids.create()
+    cats.create()
     ui.restartUI()
     startTimer()
     gv.game_state = 'PLAYING'
@@ -62,6 +68,7 @@ local function startGame()
     gv.setVariablesToStartValues()
     background.create()
     asteroids.create()
+    cats.create()
     ui.create()
     startTimer()
     gv.game_state = 'PLAYING'
@@ -84,6 +91,7 @@ local function mainListener( event )
         restartGameForNextLevel()  
     elseif gameTimer and gv.game_state == 'PLAYING' then
         asteroids.move()
+        cats.move()
     end
 end
 

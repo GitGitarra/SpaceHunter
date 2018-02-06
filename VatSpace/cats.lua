@@ -1,7 +1,7 @@
 -- cat module
-local sounds = require( "sounds" )
-local ui = require( "ui" )
-local gv = require( "gamevariables" )
+local sounds = require("sounds")
+local ui = require("ui")
+local gv = require("gamevariables")
 
 local M = {}
 
@@ -17,13 +17,13 @@ local function showExtraTime(x, y)
         time.y = time.y - 1
         if event.count == 10 then
             time:removeSelf()
-            time=nil
+            time = nil
         end
     end, 10)
 end
 
 local function tapCatInSpace(event)
-    if ( event.phase == "ended" ) then
+    if (event.phase == "ended") then
         cat = event.target
         if (cat.hasTime) then
             sounds.playCatMeow()
@@ -35,40 +35,26 @@ local function tapCatInSpace(event)
     return true
 end
 
-local function randomizeFieldsFor(cat)
-    cat.isVisible = false
-    visibilty = {false, false, true}
-    x = math.random(1, 3)
-    cat.isVisible = visibilty[x]
+local function createCatInSpace()
+    cat = display.newImage("resources/graphics/cat.png")
     scaleRandom = math.random(1, 1.5)
     cat:scale(scaleRandom, scaleRandom)
     cat.speed = math.random() + math.random(2, 5)
     cat.hasTime = true
+    cat.isVisible = math.random(1, 3) > 2 and true or false
     cat.x = math.random(display.contentWidth + 50, display.contentWidth + 350)
-    cat.y = math.random(50, display.contentHeight-60)
-
+    cat.y = math.random(50, display.contentHeight - 60)
+    cat:addEventListener("touch", tapCatInSpace)
+    M.cat = cat
 end
 
-local function createCatInSpace()
-        cat = display.newImage("resources/graphics/cat.png")
-        cat.speed = 0
-        cat.hasTime = true
-        cat.isVisible = false
-        randomizeFieldsFor(cat)
-        cat.x = math.random(display.contentWidth + 50, display.contentWidth + 350)
-        cat.y = math.random(50, display.contentHeight-60)
-        cat:addEventListener( "touch", tapCatInSpace )
-        M.cat = cat
-end
-
-function M.move() 
-        a = M.cat
-        moveCat(a)
-        if a.x < -50 then  
-            M.destroy()
-            createCatInSpace()
-            randomizeFieldsFor(a)
-        end
+function M.move()
+    a = M.cat
+    moveCat(a)
+    if a.x < -50 then
+        M.destroy()
+        createCatInSpace()
+    end
 end
 
 function M.create(g)

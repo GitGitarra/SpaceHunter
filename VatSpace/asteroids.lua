@@ -45,6 +45,8 @@ local function randomizeFieldsFor(asteroid)
     asteroid.moneyAmount = math.random(1, 5)
     asteroid.x = math.random(display.contentWidth + 50, display.contentWidth + 350)
     asteroid.y = math.random(50, display.contentHeight-60)
+    print(contentWidth)
+    print(contentHeight)
 end
 
 local function createCoinAsteroids()
@@ -53,7 +55,7 @@ local function createCoinAsteroids()
         "resources/graphics/asteroid2factory.png",
         "resources/graphics/asteroid3factory.png"}
 
-    for i=#M.asteroids,#M.asteroids+5 do
+    for i=1,5 do
         asteroid = display.newImage( asteroidsImages[math.random(#asteroidsImages)] )
         asteroid.speed = 0
         asteroid.moneyAmount = 0
@@ -61,12 +63,12 @@ local function createCoinAsteroids()
         scaleRandom = math.random(1, 1.5)
         asteroid:scale(scaleRandom, scaleRandom)
         asteroid:addEventListener( "touch", tapAsteroid )
-        M.asteroids[i] = asteroid
+        table.insert( M.asteroids, asteroid )
     end
 end
 
 local function createSaintAsteroids()
-    for i=#M.asteroids,#M.asteroids+2 do
+    for i=1,5 do
         church_asteroid = display.newImage( "resources/graphics/church.png" )
         church_asteroid.speed = 0
         church_asteroid.moneyAmount = 0
@@ -74,7 +76,7 @@ local function createSaintAsteroids()
         scaleRandom = math.random(1, 1.5)
         church_asteroid:scale(scaleRandom, scaleRandom)
         church_asteroid:addEventListener( "touch", tapSaintAsteroid )
-        M.asteroids[i] =church_asteroid
+        table.insert( M.asteroids, church_asteroid )
     end
 end
 
@@ -85,14 +87,14 @@ local function createAsteroids()
         "resources/graphics/asteroid3.png", 
         "resources/graphics/asteroid4.png"}
 
-    for i=1,20 do
+    for i=1,15 do
         asteroid = display.newImage( asteroidsImages[math.random(#asteroidsImages)] )   
         asteroid.speed = 0
         asteroid.moneyAmount = 0
         randomizeFieldsFor(asteroid)
         scaleRandom = math.random(1, 1.5)
         asteroid:scale(scaleRandom, scaleRandom)
-        M.asteroids[i] = asteroid
+        table.insert( M.asteroids, asteroid )
     end
 end
 

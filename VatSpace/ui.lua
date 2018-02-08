@@ -124,16 +124,16 @@ function M.showGameOverScreen()
     
     local button_restart = widget.newButton(
         {
-            defaultFile = "resources/graphics/btn_play.png",
-            overFile = "resources/graphics/btn_play_onclick.png",
+            defaultFile = "resources/graphics/btn_try_again.png",
+            overFile = "resources/graphics/btn_try_again_onclick.png",
             id = "restart",
             onEvent = handleButtonEvent
         }
     )
     local button_back_to_menu = widget.newButton(
         {
-            defaultFile = "resources/graphics/help_window_btn.png",
-            overFile = "resources/graphics/help_window_btn_onclick.png",
+            defaultFile = "resources/graphics/btn_menu.png",
+            overFile = "resources/graphics/btn_menu_onclick.png",
             id = "menu",
             onEvent = handleButtonEvent
         }

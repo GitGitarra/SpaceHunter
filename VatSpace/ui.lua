@@ -13,9 +13,9 @@ local function createMoneyStatusBar()
     M.progressView = display.newImage("resources/graphics/statusbar.png", -20, 25)
     M.progressView.anchorX = 0
     M.progressView:scale(0.2, 0.2)
-    M.progressView = display.newImage("resources/graphics/coin.png", -30, 25)
+    M.progressView = display.newImage("resources/graphics/coin.png", -33, 25)
     M.progressView.anchorX = 0
-    M.progressView:scale(0.35, 0.35)
+    M.progressView:scale(0.5, 0.5)
     M.progressView = widget.newProgressView(
         {
             left = -5,

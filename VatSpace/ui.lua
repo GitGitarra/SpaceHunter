@@ -13,9 +13,9 @@ local function createMoneyStatusBar()
     M.progressView = display.newImage("resources/graphics/statusbar.png", -20, 25)
     M.progressView.anchorX = 0
     M.progressView:scale(0.2, 0.2)
-    M.progressView = display.newImage("resources/graphics/coin.png", -30, 25)
+    M.progressView = display.newImage("resources/graphics/coin.png", -33, 25)
     M.progressView.anchorX = 0
-    M.progressView:scale(0.35, 0.35)
+    M.progressView:scale(0.5, 0.5)
     M.progressView = widget.newProgressView(
         {
             left = -5,
@@ -93,12 +93,10 @@ end
 
 function M.showGameOverScreen()
     gv.game_state = 'IN_MENU'
+    background.create()
     sounds.playEndGameSound()
     local game_over_page_group = display.newGroup()
-    local rect = display.newRect(game_over_page_group, display.contentCenterX, display.contentCenterY, display.contentWidth + 100, display.contentHeight + 100)
-    rect:setFillColor(0)
-    -- rect.alpha = 0.7
-    rect:addEventListener("touch", function() return true end)
+    --rect:addEventListener("touch", function() return true end)
     display.newText(game_over_page_group, "You loooose!", display.contentCenterX + 100, display.contentCenterY - 100, "Munro.ttf", 35)
     display.newText(game_over_page_group, "Mr. Moravat is", display.contentCenterX + 100, display.contentCenterY - 50, "Munro.ttf", 35)
     display.newText(game_over_page_group, "now really sad :(", display.contentCenterX + 100, display.contentCenterY, "Munro.ttf", 35)
@@ -124,16 +122,16 @@ function M.showGameOverScreen()
     
     local button_restart = widget.newButton(
         {
-            defaultFile = "resources/graphics/btn_play.png",
-            overFile = "resources/graphics/btn_play_onclick.png",
+            defaultFile = "resources/graphics/btn_try_again.png",
+            overFile = "resources/graphics/btn_try_again_onclick.png",
             id = "restart",
             onEvent = handleButtonEvent
         }
     )
     local button_back_to_menu = widget.newButton(
         {
-            defaultFile = "resources/graphics/help_window_btn.png",
-            overFile = "resources/graphics/help_window_btn_onclick.png",
+            defaultFile = "resources/graphics/btn_menu.png",
+            overFile = "resources/graphics/btn_menu_onclick.png",
             id = "menu",
             onEvent = handleButtonEvent
         }
@@ -222,12 +220,12 @@ function M.showHelp()
     helpFrame:scale(1.2,1.2)
     local options = 
     {
-        text = "To help Matt collect VAT tap (icon of asteroid) as long as they giving you money."..
-                        "Avoid (icon of church) they are tax free and you will loose money."..
-                         "      is here to help you, catch him to get extra time.".. 
-                         "To reach next level you need collect enough money to fill progress bar before your time runs out.",    
+        text = "To help Matt collect VAT tap ......... as long as they giving you money."..
+                        " Avoid  .......  they are tax free and you will loose money."..
+                         " This   .....   is here to help you, catch him to get extra time.".. 
+                         " To reach next level you need collect enough money to fill progress bar before your time runs out.",    
         x = display.contentCenterX,
-        y = display.contentCenterY + 5,
+        y = display.contentCenterY + 10,
         width = 300,
         font = "Munro.ttf",   
         fontSize = 17,
@@ -238,8 +236,15 @@ function M.showHelp()
     help_page_group:insert(helpText)
 
     local cat = display.newImage(help_page_group, "resources/graphics/cat.png",
-                                display.contentCenterX - 90, display.contentCenterY)
+                                display.contentCenterX - 100, display.contentCenterY + 10)
     cat:scale(0.7,0.7)
+    
+    local asteroid = display.newImage(help_page_group, "resources/graphics/factory_in_text.png",
+    display.contentCenterX + 60, display.contentCenterY - 45)
+
+    local church = display.newImage(help_page_group, "resources/graphics/church_in_text.png",
+    display.contentCenterX + 85, display.contentCenterY - 30)
+
     local function handleButtonEvent(event)
         if ("ended" == event.phase) then
             background.destroy()

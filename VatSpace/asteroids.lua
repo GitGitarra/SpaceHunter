@@ -45,8 +45,6 @@ local function randomizeFieldsFor(asteroid)
     asteroid.moneyAmount = math.random(1, 5)
     asteroid.x = math.random(display.contentWidth + 50, display.contentWidth + 350)
     asteroid.y = math.random(50, display.contentHeight-60)
-    print(contentWidth)
-    print(contentHeight)
 end
 
 local function createCoinAsteroids()

@@ -93,12 +93,10 @@ end
 
 function M.showGameOverScreen()
     gv.game_state = 'IN_MENU'
+    background.create()
     sounds.playEndGameSound()
     local game_over_page_group = display.newGroup()
-    local rect = display.newRect(game_over_page_group, display.contentCenterX, display.contentCenterY, display.contentWidth + 100, display.contentHeight + 100)
-    rect:setFillColor(0)
-    -- rect.alpha = 0.7
-    rect:addEventListener("touch", function() return true end)
+    --rect:addEventListener("touch", function() return true end)
     display.newText(game_over_page_group, "You loooose!", display.contentCenterX + 100, display.contentCenterY - 100, "Munro.ttf", 35)
     display.newText(game_over_page_group, "Mr. Moravat is", display.contentCenterX + 100, display.contentCenterY - 50, "Munro.ttf", 35)
     display.newText(game_over_page_group, "now really sad :(", display.contentCenterX + 100, display.contentCenterY, "Munro.ttf", 35)

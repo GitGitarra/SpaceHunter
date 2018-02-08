@@ -43,7 +43,7 @@ end
 local function randomizeFieldsFor(asteroid)
     asteroid.speed = math.random() + math.random(2, 5)
     asteroid.moneyAmount = math.random(1, 5)
-    asteroid.x = math.random(display.contentWidth + 50, display.contentWidth + 350)
+    asteroid.x = math.random(display.contentWidth + 60, display.contentWidth + 250)
     asteroid.y = math.random(50, display.contentHeight-60)
 end
 
@@ -100,7 +100,7 @@ function M.move()
     for i=1,#M.asteroids do
         a = M.asteroids[i]
         moveAsteroid(a)
-        if a.x < -50 then
+        if a.x < -60 then
             randomizeFieldsFor(a)
         end
     end

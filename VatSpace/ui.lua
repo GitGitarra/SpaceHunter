@@ -222,12 +222,12 @@ function M.showHelp()
     helpFrame:scale(1.2,1.2)
     local options = 
     {
-        text = "To help Matt collect VAT tap (icon of asteroid) as long as they giving you money."..
-                        "Avoid (icon of church) they are tax free and you will loose money."..
-                         "      is here to help you, catch him to get extra time.".. 
-                         "To reach next level you need collect enough money to fill progress bar before your time runs out.",    
+        text = "To help Matt collect VAT tap ......... as long as they giving you money."..
+                        " Avoid  .......  they are tax free and you will loose money."..
+                         " This   .....   is here to help you, catch him to get extra time.".. 
+                         " To reach next level you need collect enough money to fill progress bar before your time runs out.",    
         x = display.contentCenterX,
-        y = display.contentCenterY + 5,
+        y = display.contentCenterY + 10,
         width = 300,
         font = "Munro.ttf",   
         fontSize = 17,
@@ -238,8 +238,15 @@ function M.showHelp()
     help_page_group:insert(helpText)
 
     local cat = display.newImage(help_page_group, "resources/graphics/cat.png",
-                                display.contentCenterX - 90, display.contentCenterY)
+                                display.contentCenterX - 100, display.contentCenterY + 10)
     cat:scale(0.7,0.7)
+    
+    local asteroid = display.newImage(help_page_group, "resources/graphics/factory_in_text.png",
+    display.contentCenterX + 60, display.contentCenterY - 45)
+
+    local church = display.newImage(help_page_group, "resources/graphics/church_in_text.png",
+    display.contentCenterX + 85, display.contentCenterY - 30)
+
     local function handleButtonEvent(event)
         if ("ended" == event.phase) then
             background.destroy()

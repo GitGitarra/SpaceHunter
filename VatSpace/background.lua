@@ -5,8 +5,8 @@ M.background = nil
 function M.create()
     local sheetOptions =
     {
-        width = 500,
-        height = 281,
+        width = 570,
+        height = 380,
         numFrames = 18
     }
     local space_background = graphics.newImageSheet( "resources/graphics/space_bg.png", sheetOptions )
@@ -23,7 +23,6 @@ function M.create()
     M.background = display.newSprite( space_background, sequences_spaceStars )
     M.background.x = display.contentCenterX
     M.background.y = display.contentCenterY
-    M.background:scale(1.15,1.15)
     M.background:play()
 end
 

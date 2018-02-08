@@ -96,7 +96,6 @@ function M.showGameOverScreen()
     background.create()
     sounds.playEndGameSound()
     local game_over_page_group = display.newGroup()
-    --rect:addEventListener("touch", function() return true end)
     display.newText(game_over_page_group, "You loooose!", display.contentCenterX + 100, display.contentCenterY - 100, "Munro.ttf", 35)
     display.newText(game_over_page_group, "Mr. Moravat is", display.contentCenterX + 100, display.contentCenterY - 50, "Munro.ttf", 35)
     display.newText(game_over_page_group, "now really sad :(", display.contentCenterX + 100, display.contentCenterY, "Munro.ttf", 35)
@@ -112,7 +111,7 @@ function M.showGameOverScreen()
         if ("ended" == event.phase and event.target.id == "restart") then
             game_over_page_group:removeSelf()
             game_over_page_group = nil
-            gv.game_state = 'RESTART'
+            gv.game_state = 'PLAY'
         elseif ("ended" == event.phase and event.target.id == "menu") then
             game_over_page_group:removeSelf()
             game_over_page_group = nil

@@ -55,15 +55,6 @@ local function gameOver()
     ui.showGameOverScreen()
 end
 
-local function restartGame()
-    gv.setVariablesToStartValues()
-    asteroids.create()
-    cats.create()
-    ui.restartUI()
-    startTimer()
-    gv.game_state = 'PLAYING'
-end
-
 local function startGame()
     gv.setVariablesToStartValues()
     background.create()
@@ -77,8 +68,6 @@ end
 local function mainListener( event )
     if gv.game_state == 'PLAY' then
         startGame()
-    elseif gv.game_state == 'RESTART' then
-        restartGame()
     elseif gv.game_state == 'MENU' then
         ui.showMenu()
     elseif gv.game_state == 'HELP' then

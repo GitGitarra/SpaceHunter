@@ -1,7 +1,6 @@
 local widget = require("widget")
 local gv = require("gamevariables")
 local sounds = require("sounds")
-local background = require( "background" )
 
 local M = {}
 
@@ -93,7 +92,6 @@ end
 
 function M.showGameOverScreen()
     gv.game_state = 'IN_MENU'
-    background.create()
     sounds.playEndGameSound()
     local game_over_page_group = display.newGroup()
     display.newText(game_over_page_group, "You loooose!", display.contentCenterX + 100, display.contentCenterY - 100, "Munro.ttf", 35)
@@ -149,7 +147,6 @@ end
 
 function M.showMenu()
     gv.game_state = 'IN_MENU'
-    background.create()
     local menu_page_group = display.newGroup()
     local menuFrame = display.newImage(menu_page_group, "resources/graphics/menu_window_frame.png", 
     display.contentCenterX, display.contentCenterY - 1)    
@@ -212,7 +209,6 @@ end
 
 function M.showHelp()
     gv.game_state = 'IN_MENU'
-    background.create()
     local help_page_group = display.newGroup()
     local helpFrame = display.newImage(help_page_group, "resources/graphics/help__window_frame.png", 
                                        display.contentCenterX, display.contentCenterY - 3)    
@@ -246,7 +242,7 @@ function M.showHelp()
 
     local function handleButtonEvent(event)
         if ("ended" == event.phase) then
-            background.destroy()
+       
             help_page_group:removeSelf()
             help_page_group = nil
             gv.game_state = 'MENU'
@@ -269,7 +265,6 @@ end
 function M.showCredits()
     gv.showLeaderboards()
     gv.game_state = 'IN_MENU'
-    background.create()
     local credits_page_group = display.newGroup()
     local creditsFrame = display.newImage(credits_page_group, "resources/graphics/credits_window_frame.png", 
                                             display.contentCenterX, display.contentCenterY - 3)    
@@ -293,7 +288,7 @@ function M.showCredits()
     
     local function handleButtonEvent(event)
         if ("ended" == event.phase) then
-            background.destroy()
+       
             credits_page_group:removeSelf()
             credits_page_group = nil
             gv.game_state = 'MENU'

@@ -24,7 +24,7 @@ M.game_state = 'START'
 -- 'MENU' - show start menu screen
 -- 'HELP' - show help paage
 -- 'CREDITS' - show credits page
--- 'RESTART' - restart game command
+-- 'TRY_AGAIN' - restart game command
 
 function M.setVariablesToStartValues()
     M.money = 1

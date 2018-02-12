@@ -20,4 +20,12 @@ application =
 		},
 		--]]
 	},
+	license = 
+	{
+        google = 
+        {
+           key = "",
+           policy = "serverManaged",
+        },
+    },
 }

@@ -267,6 +267,7 @@ function M.showHelp()
 end
 
 function M.showCredits()
+    gv.showLeaderboards()
     gv.game_state = 'IN_MENU'
     background.create()
     local credits_page_group = display.newGroup()

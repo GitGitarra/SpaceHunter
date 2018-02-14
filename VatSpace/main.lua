@@ -58,7 +58,6 @@ end
 
 local function startGame()
     gv.setVariablesToStartValues()
-    background.create()
     asteroids.create()
     cats.create()
     ui.create()
@@ -98,6 +97,7 @@ end
 
 local function run()
     gv.initGooglePlayServices()
+    background.create()
     gv.game_state = 'MENU'
     Runtime:addEventListener( "enterFrame", mainListener )    
 end

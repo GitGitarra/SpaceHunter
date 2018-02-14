@@ -21,7 +21,9 @@ settings =
 		usesPermissions =
 		{
 			"android.permission.INTERNET",
+			"com.android.vending.CHECK_LICENSE",
 		},
+		googlePlayGamesAppId = "",
 	},
 
 	--
@@ -53,6 +55,11 @@ settings =
 	--
 	plugins =
 	{
+		["plugin.gpgs"] = 
+		{
+          publisherId = "com.coronalabs",
+          supportedPlatforms = {android = true}
+        },
 
 	},
 

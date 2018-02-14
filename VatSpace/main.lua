@@ -49,6 +49,7 @@ end
 
 local function gameOver()
     gv.game_state = 'GAME_OVER'
+    gv.submitScore()
     stopTimer()
     asteroids.destroy()
     cats.destroy()
@@ -85,6 +86,7 @@ local function mainListener( event )
 end
 
 local function run()
+    gv.initGooglePlayServices()
     gv.game_state = 'MENU'
     Runtime:addEventListener( "enterFrame", mainListener )    
 end

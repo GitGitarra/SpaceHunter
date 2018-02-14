@@ -9,29 +9,34 @@ M.timeText = nil
 M.moneyText = nil
 
 local function createMoneyStatusBar()
-    M.progressView = display.newImage("resources/graphics/statusbar.png", -20, 25)
+    progressViewGroup = display.newGroup()
+    M.progressView = display.newImage(progressViewGroup, "resources/graphics/statusbar.png", -20, -25)
     M.progressView.anchorX = 0
     M.progressView:scale(0.2, 0.2)
-    M.progressView = display.newImage("resources/graphics/coin.png", -33, 25)
+    M.progressView = display.newImage(progressViewGroup, "resources/graphics/coin.png", -33, -25)
     M.progressView.anchorX = 0
     M.progressView:scale(0.5, 0.5)
     M.progressView = widget.newProgressView(
         {
             left = -5,
-            top = 23,
+            top = -27,
             width = 103,
             isAnimated = true
         }
     )
     M.progressView:scale(1, 3)
     M.progressView:setProgress(0)
+    progressViewGroup:insert(M.progressView)
+    transition.to( progressViewGroup, { time = 500, delay = 250, y = 50 } )
 end
 
 local function createGoalText()
+    goatTextGroup = display.newGroup()
     M.moneyText = {}
-    M.moneyText[1] = display.newText("Level: " .. gv.level, display.contentCenterX, 17, "Munro.ttf", 16)
-    M.moneyText[2] = display.newText("Gain coins for 5000+ program", display.contentCenterX, 33, "Munro.ttf", 16)
-    M.timeText = display.newText("0:60s", display.contentWidth, 25, "Munro.ttf", 16)
+    M.moneyText[1] = display.newText(goatTextGroup, "Level: " .. gv.level, display.contentCenterX, -25, "Munro.ttf", 16)
+    -- M.moneyText[2] = display.newText("Gain coins for 5000+ program", display.contentCenterX, 33, "Munro.ttf", 16)
+    M.timeText = display.newText( goatTextGroup, "0:60s", display.contentWidth, -25, "Munro.ttf", 16)
+    transition.to( goatTextGroup, { time = 500, delay = 250, y = 50 } )
 end
 
 local function createSpeechForSpaceman()
@@ -64,11 +69,12 @@ local function createSpeechForSpaceman()
 end
 
 local function createSpaceman()
-    local morawiecki = display.newImage("resources/graphics/morawiecki.png", 10, 250)
+    local morawiecki = display.newImage("resources/graphics/morawiecki.png", 10, 400)
     morawiecki:scale(0.1, 0.1)
     morawiecki.fill.effect = "filter.pixelate"
     morawiecki.fill.effect.numPixels = 15
     morawiecki:addEventListener("touch", createSpeechForSpaceman)
+    transition.to( morawiecki, { time = 500, delay = 250, y = 250 } )
 end
 
 function M.showNextLevelScreen()
@@ -109,7 +115,7 @@ function M.showGameOverScreen()
         if ("ended" == event.phase and event.target.id == "restart") then
             game_over_page_group:removeSelf()
             game_over_page_group = nil
-            gv.game_state = 'PLAY'
+            gv.game_state = 'TRY_AGAIN'
         elseif ("ended" == event.phase and event.target.id == "menu") then
             game_over_page_group:removeSelf()
             game_over_page_group = nil
@@ -148,13 +154,20 @@ end
 function M.showMenu()
     gv.game_state = 'IN_MENU'
     local menu_page_group = display.newGroup()
-    local menuFrame = display.newImage(menu_page_group, "resources/graphics/menu_window_frame.png", 
-    display.contentCenterX, display.contentCenterY - 1)    
+    local menuFrame = display.newImage(menu_page_group, "resources/graphics/menu_window_frame.png", display.contentCenterX, display.contentCenterY - 1)    
     menuFrame:scale(1.2,1.2)
+
     local function handleButtonEvent(event)
         if ("ended" == event.phase and event.target.id == "play") then
-            menu_page_group:removeSelf()
-            menu_page_group = nil
+            transition.to( menu_page_group, 
+                { 
+                    time = 500,
+                    x = -display.contentCenterX * 2,
+                    onComplete = function()
+                        menu_page_group:removeSelf()
+                        menu_page_group = nil
+                    end 
+                })
             gv.game_state = 'PLAY'
         elseif ("ended" == event.phase and event.target.id == "help") then
             menu_page_group:removeSelf()
@@ -166,6 +179,7 @@ function M.showMenu()
             gv.game_state = 'CREDITS'
         end
     end
+
     local button_play = widget.newButton(
         {
             defaultFile = "resources/graphics/btn_play.png",
@@ -174,6 +188,7 @@ function M.showMenu()
             onEvent = handleButtonEvent
         }
     )
+
     menu_page_group:insert(button_play)
     button_play.x = display.contentCenterX
     button_play.y = display.contentCenterY - 32

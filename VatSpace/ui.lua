@@ -72,7 +72,6 @@ local function createSpeechForSpaceman()
 end
 
 local function createSpaceman()
-    print("wtf")
     M.morawieckiGroup = display.newGroup()
     local morawiecki = display.newImage(M.morawieckiGroup, "resources/graphics/morawiecki.png", 10, 500)
     morawiecki:scale(0.1, 0.1)

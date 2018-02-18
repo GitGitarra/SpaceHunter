@@ -51,6 +51,7 @@ local function gameOver()
     gv.game_state = 'GAME_OVER'
     gv.submitScore()
     stopTimer()
+    ui.destroyUI()
     asteroids.destroy()
     cats.destroy()
     ui.showGameOverScreen()

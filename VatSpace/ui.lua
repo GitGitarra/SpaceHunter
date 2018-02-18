@@ -7,13 +7,16 @@ local M = {}
 M.progressView = nil
 M.timeText = nil
 M.moneyText = nil
+M.progressViewGroup = nil
+M.goalTextGroup = nil
+M.morawieckiGroup = nil
 
 local function createMoneyStatusBar()
-    progressViewGroup = display.newGroup()
-    M.progressView = display.newImage(progressViewGroup, "resources/graphics/statusbar.png", -20, -25)
+    M.progressViewGroup = display.newGroup()
+    M.progressView = display.newImage(M.progressViewGroup, "resources/graphics/statusbar.png", -20, -25)
     M.progressView.anchorX = 0
     M.progressView:scale(0.2, 0.2)
-    M.progressView = display.newImage(progressViewGroup, "resources/graphics/coin.png", -33, -25)
+    M.progressView = display.newImage(M.progressViewGroup, "resources/graphics/coin.png", -33, -25)
     M.progressView.anchorX = 0
     M.progressView:scale(0.5, 0.5)
     M.progressView = widget.newProgressView(
@@ -26,17 +29,17 @@ local function createMoneyStatusBar()
     )
     M.progressView:scale(1, 3)
     M.progressView:setProgress(0)
-    progressViewGroup:insert(M.progressView)
-    transition.to( progressViewGroup, { time = 500, delay = 250, y = 50 } )
+    M.progressViewGroup:insert(M.progressView)
+    transition.to( M.progressViewGroup, { time = 500, delay = 250, y = 50 } )
 end
 
 local function createGoalText()
-    goatTextGroup = display.newGroup()
+    M.goalTextGroup = display.newGroup()
     M.moneyText = {}
-    M.moneyText[1] = display.newText(goatTextGroup, "Level: " .. gv.level, display.contentCenterX, -25, "Munro.ttf", 16)
+    M.moneyText[1] = display.newText(M.goalTextGroup, "Level: " .. gv.level, display.contentCenterX, -25, "Munro.ttf", 16)
     -- M.moneyText[2] = display.newText("Gain coins for 5000+ program", display.contentCenterX, 33, "Munro.ttf", 16)
-    M.timeText = display.newText( goatTextGroup, "0:60s", display.contentWidth, -25, "Munro.ttf", 16)
-    transition.to( goatTextGroup, { time = 500, delay = 250, y = 50 } )
+    M.timeText = display.newText( M.goalTextGroup, "0:60s", display.contentWidth, -25, "Munro.ttf", 16)
+    transition.to( M.goalTextGroup, { time = 500, delay = 250, y = 50 } )
 end
 
 local function createSpeechForSpaceman()
@@ -69,12 +72,13 @@ local function createSpeechForSpaceman()
 end
 
 local function createSpaceman()
-    local morawiecki = display.newImage("resources/graphics/morawiecki.png", 10, 400)
+    M.morawieckiGroup = display.newGroup()
+    local morawiecki = display.newImage(M.morawieckiGroup, "resources/graphics/morawiecki.png", 10, 500)
     morawiecki:scale(0.1, 0.1)
     morawiecki.fill.effect = "filter.pixelate"
     morawiecki.fill.effect.numPixels = 15
     morawiecki:addEventListener("touch", createSpeechForSpaceman)
-    transition.to( morawiecki, { time = 500, delay = 250, y = 250 } )
+    transition.to( M.morawieckiGroup, { time = 500, delay = 250, y = -250 } )
 end
 
 function M.showNextLevelScreen()
@@ -334,6 +338,15 @@ function M.create()
     createGoalText()
     createMoneyStatusBar()
     createSpaceman()
+end
+
+function M.destroyUI()
+    M.progressViewGroup:removeSelf()
+    M.goalTextGroup:removeSelf()
+    M.morawieckiGroup:removeSelf()
+    M.progressViewGroup = nil
+    M.goalTextGroup = nil
+    M.morawieckiGroup = nil
 end
 
 return M

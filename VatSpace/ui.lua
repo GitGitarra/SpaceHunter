@@ -13,23 +13,23 @@ M.morawieckiGroup = nil
 
 local function createMoneyStatusBar()
     M.progressViewGroup = display.newGroup()
-    M.progressView = display.newImage(M.progressViewGroup, "resources/graphics/statusbar.png", -20, -25)
+
+    local statusBar = display.newImage("resources/graphics/statusbar.png", -20, -25)
+    statusBar.anchorX = 0
+    statusBar:scale(0.2, 0.2)
+
+    local coin = display.newImage("resources/graphics/coin.png", -36, -25)
+    coin.anchorX = 0
+    coin:scale(0.6, 0.6)
+    
+    M.progressView = display.newRect( -3, -25, 0, 11 )
+    M.progressView:setFillColor( 230/255, 184/255, 0 )
     M.progressView.anchorX = 0
-    M.progressView:scale(0.2, 0.2)
-    M.progressView = display.newImage(M.progressViewGroup, "resources/graphics/coin.png", -33, -25)
-    M.progressView.anchorX = 0
-    M.progressView:scale(0.5, 0.5)
-    M.progressView = widget.newProgressView(
-        {
-            left = -5,
-            top = -27,
-            width = 103,
-            isAnimated = true
-        }
-    )
-    M.progressView:scale(1, 3)
-    M.progressView:setProgress(0)
+    M.progressView.setProgress = function (self, progress) self.width = progress * 100 end
+
+    M.progressViewGroup:insert(statusBar)
     M.progressViewGroup:insert(M.progressView)
+    M.progressViewGroup:insert(coin)
     transition.to( M.progressViewGroup, { time = 500, delay = 250, y = 50 } )
 end
 

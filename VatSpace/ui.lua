@@ -75,8 +75,6 @@ local function createSpaceman()
     M.morawieckiGroup = display.newGroup()
     local morawiecki = display.newImage(M.morawieckiGroup, "resources/graphics/morvat_in_space.png", 10, 500)
     morawiecki:scale(0.5, 0.5)
-    -- morawiecki.fill.effect = "filter.pixelate"
-    -- morawiecki.fill.effect.numPixels = 2.5
     morawiecki:addEventListener("touch", createSpeechForSpaceman)
     transition.to( M.morawieckiGroup, { time = 500, delay = 250, y = -250 } )
 end

@@ -22,13 +22,22 @@ local function showExtraTime(x, y)
     end, 10)
 end
 
+local function addExtraTime()
+    local extraTime = 10
+    if (gv.time + extraTime >= 60 ) then
+        gv.time = 60
+    else
+        gv.time = gv.time + 10
+    end
+end
+
 local function tapCatInSpace(event)
     if (event.phase == "ended") then
         cat = event.target
         if (cat.hasTime) then
             sounds.playCatMeow()
             showExtraTime(cat.x + 10, cat.y - 25)
-            gv.time = gv.time + 10
+            addExtraTime()
             cat.hasTime = false
         end
     end

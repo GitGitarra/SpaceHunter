@@ -43,7 +43,7 @@ end
 local function randomizeFieldsFor(asteroid)
     asteroid.speed = math.random() + math.random(2, 5)
     asteroid.moneyAmount = math.random(1, 5)
-    asteroid.x = math.random(display.contentWidth + 60, display.contentWidth + 250)
+    asteroid.x = math.random(display.contentWidth + 50, display.contentWidth + 350)
     asteroid.y = math.random(50, display.contentHeight-60)
 end
 

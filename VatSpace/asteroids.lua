@@ -58,7 +58,7 @@ local function createCoinAsteroids()
         asteroid.speed = 0
         asteroid.moneyAmount = 0
         randomizeFieldsFor(asteroid)
-        scaleRandom = math.random(1, 1.5)
+        scaleRandom = math.random(0.9, 1.5)
         asteroid:scale(scaleRandom, scaleRandom)
         asteroid:addEventListener( "touch", tapAsteroid )
         table.insert( M.asteroids, asteroid )
@@ -71,7 +71,7 @@ local function createSaintAsteroids()
         church_asteroid.speed = 0
         church_asteroid.moneyAmount = 0
         randomizeFieldsFor(church_asteroid)
-        scaleRandom = math.random(1, 1.5)
+        scaleRandom = math.random(0.7, 1.4)
         church_asteroid:scale(scaleRandom, scaleRandom)
         church_asteroid:addEventListener( "touch", tapSaintAsteroid )
         table.insert( M.asteroids, church_asteroid )
@@ -90,7 +90,7 @@ local function createAsteroids()
         asteroid.speed = 0
         asteroid.moneyAmount = 0
         randomizeFieldsFor(asteroid)
-        scaleRandom = math.random(1, 1.5)
+        scaleRandom = math.random(0.7, 1.3)
         asteroid:scale(scaleRandom, scaleRandom)
         table.insert( M.asteroids, asteroid )
     end

@@ -66,20 +66,9 @@ local function startGame()
     gv.game_state = 'PLAYING'
 end
 
-local function tryAgain()
-    gv.setVariablesToStartValues()
-    asteroids.create()
-    cats.create()
-    ui.restartUI()
-    startTimer()
-    gv.game_state = 'PLAYING'
-end
-
 local function mainListener( event )
     if gv.game_state == 'PLAY' then
         startGame()
-    elseif gv.game_state == 'TRY_AGAIN' then
-        tryAgain()
     elseif gv.game_state == 'MENU' then
         ui.showMenu()
     elseif gv.game_state == 'HELP' then

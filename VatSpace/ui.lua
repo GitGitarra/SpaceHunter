@@ -117,7 +117,7 @@ function M.showGameOverScreen()
         if ("ended" == event.phase and event.target.id == "restart") then
             game_over_page_group:removeSelf()
             game_over_page_group = nil
-            gv.game_state = 'TRY_AGAIN'
+            gv.game_state = 'PLAY'
         elseif ("ended" == event.phase and event.target.id == "menu") then
             game_over_page_group:removeSelf()
             game_over_page_group = nil
@@ -323,13 +323,6 @@ function M.showCredits()
     button_back_to_menu.x = display.contentCenterX + 4
     button_back_to_menu.y = display.contentCenterY + 102
     button_back_to_menu:scale(1.2, 1.2)
-end
-
-
-function M.restartUI()
-    M.progressView:setProgress(0)
-    M.timeText.text = "0:60s"
-    M.moneyText[1].text = "Level: 1"
 end
 
 function M.create()

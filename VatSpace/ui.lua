@@ -19,11 +19,11 @@ local _right = display.actualContentWidth
 local function createMoneyStatusBar()
     M.progressViewGroup = display.newGroup()
 
-    local statusBar = display.newImage("resources/graphics/statusbar.png", -20, -25)
+    local statusBar = display.newImage("resources/graphics/statusbar.png", _left + 16, _top - 20)
     statusBar.anchorX = 0
     statusBar:scale(0.2, 0.2)
 
-    local coin = display.newImage("resources/graphics/coin.png", -36, -25)
+    local coin = display.newImage("resources/graphics/coin.png", _left + 4, _top - 20)
     coin.anchorX = 0
     coin:scale(0.6, 0.6)
     

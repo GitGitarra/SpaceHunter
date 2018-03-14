@@ -11,6 +11,11 @@ M.progressViewGroup = nil
 M.goalTextGroup = nil
 M.morawieckiGroup = nil
 
+local _top = display.screenOriginY
+local _left = display.screenOriginX
+local _bottom = display.actualContentHeight
+local _right = display.actualContentWidth
+
 local function createMoneyStatusBar()
     M.progressViewGroup = display.newGroup()
 

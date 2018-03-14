@@ -27,7 +27,7 @@ local function createMoneyStatusBar()
     coin.anchorX = 0
     coin:scale(0.6, 0.6)
     
-    M.progressView = display.newRect( -3, -25, 0, 11 )
+    M.progressView = display.newRect( _left + 37, _top - 20, 0, 12 )
     M.progressView:setFillColor( 230/255, 184/255, 0 )
     M.progressView.anchorX = 0
     M.progressView.setProgress = function (self, progress) self.width = progress * 100 end

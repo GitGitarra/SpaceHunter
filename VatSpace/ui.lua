@@ -41,9 +41,9 @@ end
 local function createGoalText()
     M.goalTextGroup = display.newGroup()
     M.moneyText = {}
-    M.moneyText[1] = display.newText(M.goalTextGroup, "Level: " .. gv.level, display.contentCenterX, -25, "Munro.ttf", 16)
+    M.moneyText[1] = display.newText(M.goalTextGroup, "Level: " .. gv.level, display.contentCenterX, _top - 20, "Munro.ttf", 16)
     -- M.moneyText[2] = display.newText("Gain coins for 5000+ program", display.contentCenterX, 33, "Munro.ttf", 16)
-    M.timeText = display.newText( M.goalTextGroup, "0:60s", display.contentWidth, -25, "Munro.ttf", 16)
+    M.timeText = display.newText( M.goalTextGroup, "0:60s", _right - 70, _top - 20, "Munro.ttf", 16)
     transition.to( M.goalTextGroup, { time = 500, delay = 250, y = 50 } )
 end
 

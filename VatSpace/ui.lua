@@ -13,8 +13,8 @@ M.morawieckiGroup = nil
 
 local _top = display.screenOriginY
 local _left = display.screenOriginX
-local _bottom = display.actualContentHeight
-local _right = display.actualContentWidth
+local _bottom = math.abs(display.screenOriginY)
+local _right = math.abs(display.screenOriginX)
 
 local function createMoneyStatusBar()
     M.progressViewGroup = display.newGroup()
@@ -43,7 +43,7 @@ local function createGoalText()
     M.moneyText = {}
     M.moneyText[1] = display.newText(M.goalTextGroup, "Level: " .. gv.level, display.contentCenterX, _top - 20, "Munro.ttf", 16)
     -- M.moneyText[2] = display.newText("Gain coins for 5000+ program", display.contentCenterX, 33, "Munro.ttf", 16)
-    M.timeText = display.newText( M.goalTextGroup, "0:60s", _right - 70, _top - 20, "Munro.ttf", 16)
+    M.timeText = display.newText( M.goalTextGroup, "0:60s", _right + 460, _top - 20, "Munro.ttf", 16)
     transition.to( M.goalTextGroup, { time = 500, delay = 250, y = 50 } )
 end
 
@@ -78,7 +78,7 @@ end
 
 local function createSpaceman()
     M.morawieckiGroup = display.newGroup()
-    local morawiecki = display.newImage(M.morawieckiGroup, "resources/graphics/morvat_in_space.png", 10, 500)
+    local morawiecki = display.newImage(M.morawieckiGroup, "resources/graphics/morvat_in_space.png", _left + 45, _bottom + 500)
     morawiecki:scale(0.5, 0.5)
     morawiecki:addEventListener("touch", createSpeechForSpaceman)
     transition.to( M.morawieckiGroup, { time = 500, delay = 250, y = -250 } )

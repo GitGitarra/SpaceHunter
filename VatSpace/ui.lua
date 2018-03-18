@@ -11,18 +11,23 @@ M.progressViewGroup = nil
 M.goalTextGroup = nil
 M.morawieckiGroup = nil
 
+local _top = display.screenOriginY
+local _left = display.screenOriginX
+local _bottom = math.abs(display.screenOriginY)
+local _right = math.abs(display.screenOriginX)
+
 local function createMoneyStatusBar()
     M.progressViewGroup = display.newGroup()
 
-    local statusBar = display.newImage("resources/graphics/statusbar.png", -20, -25)
+    local statusBar = display.newImage("resources/graphics/statusbar.png", _left + 16, _top - 20)
     statusBar.anchorX = 0
     statusBar:scale(0.2, 0.2)
 
-    local coin = display.newImage("resources/graphics/coin.png", -36, -25)
+    local coin = display.newImage("resources/graphics/coin.png", _left + 4, _top - 20)
     coin.anchorX = 0
     coin:scale(0.6, 0.6)
     
-    M.progressView = display.newRect( -3, -25, 0, 11 )
+    M.progressView = display.newRect( _left + 37, _top - 20, 0, 12 )
     M.progressView:setFillColor( 230/255, 184/255, 0 )
     M.progressView.anchorX = 0
     M.progressView.setProgress = function (self, progress) self.width = progress * 100 end
@@ -36,9 +41,9 @@ end
 local function createGoalText()
     M.goalTextGroup = display.newGroup()
     M.moneyText = {}
-    M.moneyText[1] = display.newText(M.goalTextGroup, "Level: " .. gv.level, display.contentCenterX, -25, "Munro.ttf", 16)
+    M.moneyText[1] = display.newText(M.goalTextGroup, "Level: " .. gv.level, display.contentCenterX, _top - 20, "Munro.ttf", 16)
     -- M.moneyText[2] = display.newText("Gain coins for 5000+ program", display.contentCenterX, 33, "Munro.ttf", 16)
-    M.timeText = display.newText( M.goalTextGroup, "0:60s", display.contentWidth, -25, "Munro.ttf", 16)
+    M.timeText = display.newText( M.goalTextGroup, "0:60s", _right + 460, _top - 20, "Munro.ttf", 16)
     transition.to( M.goalTextGroup, { time = 500, delay = 250, y = 50 } )
 end
 
@@ -73,7 +78,7 @@ end
 
 local function createSpaceman()
     M.morawieckiGroup = display.newGroup()
-    local morawiecki = display.newImage(M.morawieckiGroup, "resources/graphics/morvat_in_space.png", 10, 500)
+    local morawiecki = display.newImage(M.morawieckiGroup, "resources/graphics/morvat_in_space.png", _left + 45, _bottom + 500)
     morawiecki:scale(0.5, 0.5)
     morawiecki:addEventListener("touch", createSpeechForSpaceman)
     transition.to( M.morawieckiGroup, { time = 500, delay = 250, y = -250 } )

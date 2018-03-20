@@ -37,8 +37,7 @@ end
 local function restartGameForNextLevel()
     if gameTimer then
         stopTimer() 
-        asteroids.destroy()
-        asteroids.create()
+        asteroids.recreateAsteroids()
         ui.goalTextGroup:toFront()
         ui.morawieckiGroup:toFront()
         ui.progressViewGroup:toFront()  

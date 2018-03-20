@@ -106,6 +106,11 @@ function M.move()
     end
 end
 
+function M.recreateAsteroids()
+    M.destroy()
+    M.create()
+end
+
 function M.create(g)
     createAsteroids()
     createCoinAsteroids()

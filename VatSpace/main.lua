@@ -36,7 +36,9 @@ end
 
 local function restartGameForNextLevel()
     if gameTimer then
-        stopTimer()        
+        stopTimer() 
+        asteroids.recreateAsteroids()
+        ui.staticElementsToFront()  
         gv.setVariablesForNextLevel()
         ui.moneyText[1].text = "Level: " .. gv.level
         ui.progressView:setProgress( gv.money/gv.goal )

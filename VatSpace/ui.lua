@@ -103,6 +103,12 @@ function M.showNextLevelScreen()
     end, 5)
 end
 
+function M.staticElementsToFront()
+    M.goalTextGroup:toFront()
+    M.morawieckiGroup:toFront()
+    M.progressViewGroup:toFront()
+end
+
 function M.showGameOverScreen()
     gv.game_state = 'IN_MENU'
     sounds.playEndGameSound()

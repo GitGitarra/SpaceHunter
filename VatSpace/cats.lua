@@ -58,6 +58,7 @@ local function createCatInSpace()
 end
 
 function M.move()
+    ui.staticElementsToFront()
     a = M.cat
     moveCat(a)
     if a.x < -50 then

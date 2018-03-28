@@ -84,6 +84,30 @@ local function createSpaceman()
     transition.to( M.morawieckiGroup, { time = 500, delay = 250, y = -250 } )
 end
 
+function M.playIntro()
+    local sheetOptions =
+    {
+        width = 570,
+        height = 380,
+        numFrames = 3
+    }
+    local intro_background = graphics.newImageSheet( "resources/graphics/intro.png", sheetOptions )
+    local sequences_intro = {
+        {
+            name = "background",
+            start = 1,
+            count = 3,
+            time = 2000,
+            loopCount = 0,
+            loopDirection = "bounce"
+        }
+    }
+    M.introBackground = display.newSprite( intro_background, sequences_intro )
+    M.introBackground.x = display.contentCenterX
+    M.introBackground.y = display.contentCenterY
+    M.introBackground:play()
+end
+
 function M.showNextLevelScreen()
     nextLevelScreen = display.newGroup()
     local rect = display.newRect(nextLevelScreen, display.contentCenterX, display.contentCenterY, display.contentWidth + 100, display.contentHeight + 100)

@@ -183,8 +183,6 @@ function M.showMenu()
                 })
             gv.game_state = 'PLAY'
         elseif ("ended" == event.phase and event.target.id == "leaderboards") then
-            menu_page_group:removeSelf()
-            menu_page_group = nil
             gv.game_state = 'LEADERS'
         elseif ("ended" == event.phase and event.target.id == "help") then
             menu_page_group:removeSelf()

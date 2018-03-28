@@ -62,8 +62,8 @@ end
 local function startGame()
     gv.setVariablesToStartValues()
     asteroids.create()
-    cats.create()
     ui.create()
+    cats.create()
     startTimer()
     gv.game_state = 'PLAYING'
 end

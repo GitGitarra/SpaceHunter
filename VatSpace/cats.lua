@@ -55,6 +55,7 @@ local function createCatInSpace()
     cat.y = math.random(50, display.contentHeight - 60)
     cat:addEventListener("touch", tapCatInSpace)
     M.cat = cat
+    ui.staticElementsToFront()
 end
 
 function M.move()

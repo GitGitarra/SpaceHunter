@@ -182,6 +182,10 @@ function M.showMenu()
                     end 
                 })
             gv.game_state = 'PLAY'
+        elseif ("ended" == event.phase and event.target.id == "leaderboards") then
+            menu_page_group:removeSelf()
+            menu_page_group = nil
+            gv.game_state = 'LEADERS'
         elseif ("ended" == event.phase and event.target.id == "help") then
             menu_page_group:removeSelf()
             menu_page_group = nil
@@ -249,6 +253,11 @@ function M.showMenu()
 
 end
 
+function M.showLeaderboards()
+    gv.game_state = "IN_MENU"
+    gv.showLeaderboards()
+end
+
 function M.showHelp()
     gv.game_state = 'IN_MENU'
     local help_page_group = display.newGroup()
@@ -305,7 +314,6 @@ function M.showHelp()
 end
 
 function M.showCredits()
-    gv.showLeaderboards()
     gv.game_state = 'IN_MENU'
     local credits_page_group = display.newGroup()
     local creditsFrame = display.newImage(credits_page_group, "resources/graphics/credits_window_frame.png", 

@@ -71,6 +71,8 @@ end
 local function mainListener( event )
     if gv.game_state == 'PLAY' then
         startGame()
+    elseif gv.game_state == 'LEADERS' then
+        ui.showLeaderboards()
     elseif gv.game_state == 'MENU' then
         ui.showMenu()
     elseif gv.game_state == 'HELP' then

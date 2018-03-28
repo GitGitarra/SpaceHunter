@@ -106,6 +106,20 @@ function M.playIntro()
     M.introBackground.x = display.contentCenterX
     M.introBackground.y = display.contentCenterY
     M.introBackground:play()
+
+    local button_skip_intro = widget.newButton(
+        {
+            defaultFile = "resources/graphics/btn_menu.png",
+            overFile = "resources/graphics/btn_menu_onclick.png",
+            id = "menu",
+            onEvent = handleButtonEvent
+        }
+    )
+    
+    button_skip_intro.x = _right + 420
+    button_skip_intro.y = _bottom + 300
+    button_skip_intro:scale(0.8, 0.8)
+
 end
 
 function M.showNextLevelScreen()

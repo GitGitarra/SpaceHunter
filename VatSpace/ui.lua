@@ -204,8 +204,22 @@ function M.showMenu()
 
     menu_page_group:insert(button_play)
     button_play.x = display.contentCenterX
-    button_play.y = display.contentCenterY - 32
+    button_play.y = display.contentCenterY - 37
     button_play:scale(1.2, 1.2)
+
+    local button_leaderboards = widget.newButton(
+    {
+            defaultFile = "resources/graphics/btn_leaders.png",
+            overFile = "resources/graphics/btn_leaders_onclick.png",
+            id = "leaderboards",
+            onEvent = handleButtonEvent
+        }
+    )
+
+    menu_page_group:insert(button_leaderboards)
+    button_leaderboards.x = display.contentCenterX
+    button_leaderboards.y = display.contentCenterY - 2
+    button_leaderboards:scale(1.2, 1.2)
     
     local button_help = widget.newButton(
         {
@@ -217,7 +231,7 @@ function M.showMenu()
     )
     menu_page_group:insert(button_help)
     button_help.x = display.contentCenterX
-    button_help.y = display.contentCenterY + 5
+    button_help.y = display.contentCenterY + 33
     button_help:scale(1.2, 1.2)
     
     local button_credits = widget.newButton(
@@ -230,7 +244,7 @@ function M.showMenu()
     )
     menu_page_group:insert(button_credits)
     button_credits.x = display.contentCenterX
-    button_credits.y = display.contentCenterY + 42
+    button_credits.y = display.contentCenterY + 68
     button_credits:scale(1.2, 1.2)
 
 end

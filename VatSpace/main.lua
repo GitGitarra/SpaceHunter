@@ -89,8 +89,7 @@ end
 
 local function run()
     gv.initGooglePlayServices()
-    background.create()
-    gv.game_state = 'MENU'
+    ui.playIntro()
     Runtime:addEventListener( "enterFrame", mainListener )    
 end
 

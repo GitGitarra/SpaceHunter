@@ -1,6 +1,7 @@
 local widget = require("widget")
 local gv = require("gamevariables")
 local sounds = require("sounds")
+local background = require( "background" )
 
 local M = {}
 
@@ -107,6 +108,12 @@ function M.playIntro()
     M.introBackground.y = display.contentCenterY
     M.introBackground:play()
 
+    local function handleButtonEvent(event)
+        if ("ended" == event.phase and event.target.id == "menu") then
+            gv.game_state = 'MENU'
+        end
+    end
+    
     local button_skip_intro = widget.newButton(
         {
             defaultFile = "resources/graphics/btn_menu.png",
@@ -204,6 +211,7 @@ end
 
 function M.showMenu()
     gv.game_state = 'IN_MENU'
+    background.create()
     local menu_page_group = display.newGroup()
     local menuFrame = display.newImage(menu_page_group, "resources/graphics/menu_window_frame.png", display.contentCenterX, display.contentCenterY - 1)    
     menuFrame:scale(1.2,1.2)

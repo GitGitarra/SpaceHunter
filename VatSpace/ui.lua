@@ -2,6 +2,7 @@ local widget = require("widget")
 local gv = require("gamevariables")
 local sounds = require("sounds")
 local background = require( "background" )
+local introdialog = require("introdialog")
 
 local M = {}
 
@@ -126,6 +127,8 @@ function M.playIntro()
     button_skip_intro.x = _right + 420
     button_skip_intro.y = _bottom + 300
     button_skip_intro:scale(0.8, 0.8)
+    
+    introdialog.playDialog()
 
 end
 

@@ -31,7 +31,7 @@ local function dialog2()
     local speech_bubble = graphics.newImageSheet("resources/graphics/dialog2.png", sheetOptions)
     local sequences_speech = {
         {
-            name = "bubble1",
+            name = "bubble2",
             start = 1,
             count = 54,
             time = 3000,
@@ -81,7 +81,7 @@ local function dialog4()
     local speech_bubble = graphics.newImageSheet("resources/graphics/dialog4.png", sheetOptions)
     local sequences_speech = {
         {
-            name = "bubble1",
+            name = "bubble4",
             start = 1,
             count = 32,
             time = 3000,
@@ -107,7 +107,7 @@ local function dialog5()
             local speech_bubble = graphics.newImageSheet("resources/graphics/dialog5.png", sheetOptions)
             local sequences_speech = {
                 {
-                    name = "bubble3",
+                    name = "bubble5",
                     start = 1,
                     count = 77,
                     time = 3000,
@@ -132,7 +132,7 @@ local function dialog6()
                 local speech_bubble = graphics.newImageSheet("resources/graphics/dialog6.png", sheetOptions)
                 local sequences_speech = {
                     {
-                        name = "bubble3",
+                        name = "bubble6",
                         start = 1,
                         count = 23,
                         time = 3000,
@@ -157,7 +157,7 @@ local function dialog7()
     local speech_bubble = graphics.newImageSheet("resources/graphics/dialog7.png", sheetOptions)
     local sequences_speech = {
         {
-            name = "bubble1",
+            name = "bubble7",
             start = 1,
             count = 20,
             time = 3000,
@@ -183,7 +183,7 @@ local function dialog8()
     local speech_bubble = graphics.newImageSheet("resources/graphics/dialog8.png", sheetOptions)
     local sequences_speech = {
         {
-            name = "bubble1",
+            name = "bubble8",
             start = 1,
             count = 59,
             time = 3000,
@@ -209,7 +209,7 @@ local function dialog9()
         local speech_bubble = graphics.newImageSheet("resources/graphics/dialog9.png", sheetOptions)
         local sequences_speech = {
             {
-                name = "bubble3",
+                name = "bubble9",
                 start = 1,
                 count = 27,
                 time = 3000,
@@ -234,7 +234,7 @@ local function dialog10()
     local speech_bubble = graphics.newImageSheet("resources/graphics/dialog10.png", sheetOptions)
     local sequences_speech = {
         {
-            name = "bubble1",
+            name = "bubble10",
             start = 1,
             count = 37,
             time = 3000,

@@ -178,6 +178,32 @@ local function dialog7()
     end, 1)
 end
 
+local function dialog8()
+    local sheetOptions = { width = 891, height = 225, numFrames = 59 }
+    local speech_bubble = graphics.newImageSheet("resources/graphics/dialog8.png", sheetOptions)
+    local sequences_speech = {
+        {
+            name = "bubble1",
+            start = 1,
+            count = 59,
+            time = 3000,
+            loopCount = 1,
+            loopDirection = "forward",
+            onEvent = bubbleListner
+        }
+    }
+    local dialog8 = display.newSprite(speech_bubble, sequences_speech)
+    dialog8.x = 160
+    dialog8.y = 150
+    dialog8:scale(0.25, 0.25)
+    dialog8:play()
+
+    timer.performWithDelay(4500, function(event)
+        dialog8:removeSelf()
+        dialog8 = nil
+    end, 1)
+end
+
 function M.playDialog()
     timer.performWithDelay( 2000, dialog1)
     timer.performWithDelay(7000, dialog2)
@@ -186,6 +212,7 @@ function M.playDialog()
     timer.performWithDelay(19000, dialog5)
     timer.performWithDelay(24000, dialog6)
     timer.performWithDelay(28000, dialog7)
+    timer.performWithDelay(33000, dialog8)
 end
 
 return M

@@ -103,29 +103,54 @@ local function dialog4()
 end
 
 local function dialog5()
-    local sheetOptions = { width = 738, height = 324, numFrames = 77 }
-        local speech_bubble = graphics.newImageSheet("resources/graphics/dialog5.png", sheetOptions)
-        local sequences_speech = {
-            {
-                name = "bubble3",
-                start = 1,
-                count = 77,
-                time = 3000,
-                loopCount = 1,
-                loopDirection = "forward"
+        local sheetOptions = { width = 738, height = 324, numFrames = 77 }
+            local speech_bubble = graphics.newImageSheet("resources/graphics/dialog5.png", sheetOptions)
+            local sequences_speech = {
+                {
+                    name = "bubble3",
+                    start = 1,
+                    count = 77,
+                    time = 3000,
+                    loopCount = 1,
+                    loopDirection = "forward"
+                }
             }
-        }
-        dialog5 = display.newSprite(speech_bubble, sequences_speech)
-        dialog5.x = 250
-        dialog5.y = 60
-        dialog5:scale(0.25, 0.25)
-        dialog5:play()
-        
-        timer.performWithDelay(4500, function(event)
-            dialog5:removeSelf()
-            dialog5 = nil
-        end, 1)
-    end
+            dialog5 = display.newSprite(speech_bubble, sequences_speech)
+            dialog5.x = 250
+            dialog5.y = 60
+            dialog5:scale(0.25, 0.25)
+            dialog5:play()
+            
+            timer.performWithDelay(4500, function(event)
+                dialog5:removeSelf()
+                dialog5 = nil
+            end, 1)
+end
+
+local function dialog6()
+            local sheetOptions = { width = 639, height = 180, numFrames = 23 }
+                local speech_bubble = graphics.newImageSheet("resources/graphics/dialog6.png", sheetOptions)
+                local sequences_speech = {
+                    {
+                        name = "bubble3",
+                        start = 1,
+                        count = 23,
+                        time = 3000,
+                        loopCount = 1,
+                        loopDirection = "forward"
+                    }
+                }
+                dialog6 = display.newSprite(speech_bubble, sequences_speech)
+                dialog6.x = 250
+                dialog6.y = 60
+                dialog6:scale(0.25, 0.25)
+                dialog6:play()
+                
+                timer.performWithDelay(4500, function(event)
+                    dialog6:removeSelf()
+                    dialog6 = nil
+                end, 1)
+end
 
 function M.playDialog()
     timer.performWithDelay( 2000, dialog1)
@@ -133,6 +158,7 @@ function M.playDialog()
     timer.performWithDelay(11000, dialog3)
     timer.performWithDelay(15000, dialog4)
     timer.performWithDelay(19000, dialog5)
+    timer.performWithDelay(24000, dialog6)
 end
 
 return M

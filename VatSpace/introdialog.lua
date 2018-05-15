@@ -15,11 +15,11 @@ local function dialog1()
         }
     }
     local dialog1 = display.newSprite(speech_bubble, sequences_speech)
-    dialog1.x = 150
+    dialog1.x = 160
     dialog1.y = 150
     dialog1:scale(0.25, 0.25)
     dialog1:play()
-    
+
     timer.performWithDelay(4500, function(event)
         dialog1:removeSelf()
         dialog1 = nil
@@ -40,7 +40,7 @@ local function dialog2()
         }
     }
     dialog2 = display.newSprite(speech_bubble, sequences_speech)
-    dialog2.x = 150
+    dialog2.x = 160
     dialog2.y = 150
     dialog2:scale(0.25, 0.25)
     dialog2:play()
@@ -51,9 +51,35 @@ local function dialog2()
     end, 1)
 end
 
+local function dialog3()
+local sheetOptions = { width = 927, height = 225, numFrames = 53 }
+    local speech_bubble = graphics.newImageSheet("resources/graphics/dialog3.png", sheetOptions)
+    local sequences_speech = {
+        {
+            name = "bubble3",
+            start = 1,
+            count = 53,
+            time = 3000,
+            loopCount = 1,
+            loopDirection = "forward"
+        }
+    }
+    dialog3 = display.newSprite(speech_bubble, sequences_speech)
+    dialog3.x = 250
+    dialog3.y = 60
+    dialog3:scale(0.25, 0.25)
+    dialog3:play()
+    
+    timer.performWithDelay(4500, function(event)
+        dialog3:removeSelf()
+        dialog3 = nil
+    end, 1)
+end
+
 function M.playDialog()
-    timer.performWithDelay( 3000, dialog1)
+    timer.performWithDelay( 2000, dialog1)
     timer.performWithDelay(7000, dialog2)
+    timer.performWithDelay(1000, dialog3)
 end
 
 return M

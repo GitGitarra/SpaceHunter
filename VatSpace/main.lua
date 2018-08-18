@@ -9,6 +9,7 @@ local asteroids = require( "asteroids" )
 local cats = require("cats")
 local ui = require( "ui" )
 local gv = require( "gamevariables" )
+local sounds = require( "sounds" )
 display.setStatusBar( display.HiddenStatusBar )
 
 local gameTimer = nil
@@ -51,6 +52,7 @@ end
 
 local function gameOver()
     gv.game_state = 'GAME_OVER'
+    sounds.playGameOverMusic()
     gv.submitScore()
     stopTimer()
     ui.destroyUI()
@@ -65,6 +67,7 @@ local function startGame()
     ui.create()
     cats.create()
     startTimer()
+    sounds.playBackgroundMusic()
     gv.game_state = 'PLAYING'
 end
 

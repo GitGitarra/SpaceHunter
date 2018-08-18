@@ -125,6 +125,7 @@ function M.showGameOverScreen()
     morawiecki.anchorY = 1
     morawiecki:scale(0.35, 0.35)
     local function handleButtonEvent(event)
+        if ("ended" == event.phase) then sounds.playClickSound() end
         if ("ended" == event.phase and event.target.id == "restart") then
             game_over_page_group:removeSelf()
             game_over_page_group = nil
@@ -166,11 +167,13 @@ end
 
 function M.showMenu()
     gv.game_state = 'IN_MENU'
+    sounds.playMenuMusic()    
     local menu_page_group = display.newGroup()
     local menuFrame = display.newImage(menu_page_group, "resources/graphics/menu_window_frame.png", display.contentCenterX, display.contentCenterY - 1)    
     menuFrame:scale(1.2,1.2)
 
     local function handleButtonEvent(event)
+        if ("ended" == event.phase) then sounds.playClickSound() end
         if ("ended" == event.phase and event.target.id == "play") then
             transition.to( menu_page_group, 
                 { 
@@ -270,7 +273,7 @@ function M.showHelp()
 
     local function handleButtonEvent(event)
         if ("ended" == event.phase) then
-       
+            sounds.playClickSound()            
             help_page_group:removeSelf()
             help_page_group = nil
             gv.game_state = 'MENU'
@@ -316,7 +319,7 @@ function M.showCredits()
     
     local function handleButtonEvent(event)
         if ("ended" == event.phase) then
-       
+            sounds.playClickSound()            
             credits_page_group:removeSelf()
             credits_page_group = nil
             gv.game_state = 'MENU'
